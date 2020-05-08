@@ -7,6 +7,10 @@ import lombok.Setter;
 @Setter
 public class CustomerResource {
 
-    String name;
-
+    private String firstname;
+    private String lastname;
+    private String document;
+    private String email;
+    private String Phone;
+    private String Age;
 }

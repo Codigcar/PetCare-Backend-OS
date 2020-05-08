@@ -41,38 +41,39 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long id) throws Exception{
+    public ResponseEntity<CustomerResource> getCustomerById(@PathVariable("id") Long id) throws Exception{
         Customer customerDB = customerService.findById(id);
         if (customerDB == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(customerDB);
+
+        return ResponseEntity.ok(convertToResource(customerDB));
     }
 
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer product)  throws Exception {
-
-        Customer productCreate = customerService.save(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productCreate);
+    public ResponseEntity<CustomerResource> createCustomer(@Valid @RequestBody SaveCustomerResource saveCustomerResource)  throws Exception {
+        Customer customer =convertToEntity(saveCustomerResource);
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertToResource(customerService.save(customer)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) throws Exception {
+    public ResponseEntity<CustomerResource> updateCustomer(@PathVariable("id") Long id, @RequestBody SaveCustomerResource resource) throws Exception {
+        Customer customer = convertToEntity(resource);
         customer.setId(id);
         Customer customerDB = customerService.update(customer);
         if (customerDB == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(customerDB);
+        return ResponseEntity.ok(convertToResource(customerDB));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Customer> deleteCustomer(@PathVariable("id") Long id) throws Exception{
+    public ResponseEntity<CustomerResource> deleteCustomer(@PathVariable("id") Long id) throws Exception{
         Customer customerDB= customerService.deleteById(id);
         if (customerDB == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(customerDB);
+        return ResponseEntity.ok(convertToResource(customerDB));
     }
 
     private Customer convertToEntity(SaveCustomerResource resource) {

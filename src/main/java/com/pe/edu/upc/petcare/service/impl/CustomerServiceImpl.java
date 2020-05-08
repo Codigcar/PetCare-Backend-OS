@@ -46,7 +46,13 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerDB == null){
             return null;
         }
-        customerDB.setName(customer.getName());
+        customerDB.setFirstname(customer.getFirstname());
+        customerDB.setLastname(customer.getLastname());
+        customerDB.setDocument(customer.getDocument());
+        customerDB.setEmail(customer.getEmail());
+        customerDB.setPhone(customer.getPhone());
+        customerDB.setAge(customer.getAge());
+
         return customerRepository.save(customerDB);
     }
 
