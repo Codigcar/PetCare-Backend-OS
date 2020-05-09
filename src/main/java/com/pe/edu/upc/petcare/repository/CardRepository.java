@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface CardRepository extends JpaRepository<Card,Long> {
 
     //Card findByNumberId(Long id);
-
+//para cambiar port , edit configuration    Dserver.port=8080(puerto deseado)
 
 }
