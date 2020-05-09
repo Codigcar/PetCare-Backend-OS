@@ -31,7 +31,7 @@ public class Pet {
     private String age;
 
     @NotEmpty(message = "El numero de documento no puede ser vacio")
-    @Column(name = "breed",unique = true,nullable = false)
+    @Column(name = "breed",unique = false,nullable = false)
     private String breed;
 
     @NotEmpty(message = "la foto no puede ser vacio")
@@ -39,7 +39,7 @@ public class Pet {
     private String photo;
 
     @NotEmpty(message = "el sexo no puede ser vacio")
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     private String sex;
 
     public Long getId() {
