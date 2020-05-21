@@ -6,11 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CustomerResource {
-
-    private String firstname;
-    private String lastname;
+    private Long id;
+    private String firstName;
+    private String lastName;
     private String document;
     private String email;
-    private String Phone;
-    private String Age;
+    private String phone;
+    private String age;
 }

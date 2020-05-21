@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
 
 @Data
 @Entity
@@ -23,84 +24,29 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "el nombre no puede ser vacio")
+    @NotEmpty(message = "the first name can't be empty")
     @Column(name = "first_name",nullable = false)
-    private String firstname;
+    private String firstName;
 
-    @NotEmpty(message = "el apellido no puede ser vacio")
+    @NotEmpty(message = "the last name can't be empty")
     @Column(name = "last_name",nullable = false)
-    private String lastname;
+    private String lastName;
 
-    @NotEmpty(message = "El numero de documento no puede ser vacio")
-    @Size(min = 8, max = 8, message = "el tamano del documento es 8")
+    @NotEmpty(message = "the document identity document can't be empty")
+    @Size(min = 8, max = 8, message = "the size of the identity document is 8")
     @Column(name = "document",unique = true,length = 8,nullable = false)
     private String document;
 
-    @NotEmpty(message = "el correo no puede ser vacio")
-    @Email(message = "no es un direccion de correo bien formada")
+    @NotEmpty(message = "the email can't be empty")
+    @Email(message = "it is not a valid email address")
     @Column(unique = true,nullable = false)
     private String email;
 
-    @NotEmpty(message = "el telefono no puede ser vacio")
-    @Size(min = 9, max = 9, message = "el tamano del telefono es 9")
-    private String Phone;
+    @NotEmpty(message = "the phone number can't be empty")
+    @Size(min = 9, max = 9, message = "the phone number size is 9")
+    private String phone;
 
-    @NotEmpty(message = "la edad no puede ser vacio")
-    private String Age;
+    @NotEmpty(message = "the age can't be empty")
+    private String age;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
-
-    public String getAge() {
-        return Age;
-    }
-
-    public void setAge(String age) {
-        Age = age;
-    }
 }

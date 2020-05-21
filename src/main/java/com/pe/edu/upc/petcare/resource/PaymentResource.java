@@ -5,12 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SaveCardResource {
-
+public class PaymentResource {
     private Long id;
-    private String number;
+    private String cardNumber;
     private String name;
-    private String cvv_number;
-    private String expiry_date;
-
+    private String cvvNumber;
+    private String expiryDate;
 }
