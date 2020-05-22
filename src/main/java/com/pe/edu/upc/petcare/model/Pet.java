@@ -1,10 +1,14 @@
 package com.pe.edu.upc.petcare.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,77 +20,38 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "pet")
+@Table(name = "pets")
 public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "el nombre no puede ser vacio")
+    @NotEmpty(message = "the name can't be empty")
     @Column(name = "name",nullable = false)
     private String name;
 
-    @NotEmpty(message = "la edad no puede estar vacio")
+    @NotEmpty(message = "the age can't be empty")
     private String age;
 
-    @NotEmpty(message = "El numero de documento no puede ser vacio")
-    @Column(name = "breed",unique = false,nullable = false)
+    @NotEmpty(message = "the breed can't be empty")
+    @Column(name = "breed",unique = true,nullable = false)
     private String breed;
 
-    @NotEmpty(message = "la foto no puede ser vacio")
+    @NotEmpty(message = "The photo can't be empty")
     @Column(unique = true,nullable = false)
     private String photo;
 
-    @NotEmpty(message = "el sexo no puede ser vacio")
-    @Column(nullable = false)
-    private String sex;
+    @NotEmpty(message = "the gender can't be empty")
+    @Column(unique = true,nullable = false)
+    private String gender;
 
-    public Long getId() {
-        return id;
-    }
+    //Relationships
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "customer_id",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Customer customer;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 }

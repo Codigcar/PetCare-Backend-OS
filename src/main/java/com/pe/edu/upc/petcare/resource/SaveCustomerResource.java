@@ -11,11 +11,10 @@ import javax.persistence.Id;
 @Setter
 public class SaveCustomerResource {
 
-    private Long id;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String document;
     private String email;
-    private String Phone;
-    private String Age;
+    private String phone;
+    private String age;
 }

@@ -7,17 +7,18 @@ import com.pe.edu.upc.petcare.service.PetService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/pets")
+@RequestMapping("/api")
 public class PetController {
     @Autowired
     private ModelMapper mapper;
@@ -25,53 +26,38 @@ public class PetController {
     @Autowired
     private PetService petService;
 
-    @GetMapping
-    public ResponseEntity<List<PetResource>> getAllPets() throws Exception  {
-        List<Pet> pets = new ArrayList<>();
-
-        pets = petService.findAll();
-        if (pets.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        List<PetResource> resources = pets.stream().map(this::convertToResource).collect(Collectors.toList());
-
-        return ResponseEntity.ok(resources);
+    @GetMapping("/customers/{customerId}/pets")
+    public Page<PetResource> getAllPetsByCustomerId(@PathVariable(name = "customerId")Long customerId,
+                                                    Pageable pageable){
+        Page<Pet> petPage=petService.getAllPetsByCustomerId(customerId,pageable);
+        List<PetResource>  resources=petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PetResource> getPetById(@PathVariable("id") Long id) throws Exception{
-        Pet petDB = petService.findById(id);
-        if (petDB == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(convertToResource(petDB));
+    @GetMapping("/customers/{customerId}/pets/{petId}")
+    public PetResource getPetByIdAndCustomerId(@PathVariable(name = "customerId")Long customerId,
+                                               @PathVariable(name = "petId")Long petId){
+        return convertToResource(petService.getPetByIdAndCustomerId(customerId,petId));
     }
 
-    @PostMapping
-    public ResponseEntity<PetResource> createPet(@Valid @RequestBody SavePetResource savePetResource)  throws Exception {
-        Pet pet =convertToEntity(savePetResource);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToResource(petService.save(pet)));
+
+    @PostMapping("/customers/{customerId}/pets")
+    public PetResource createPet(@PathVariable(name = "customerId")Long customerId,
+                                 @Valid @RequestBody SavePetResource resource){
+        return convertToResource(petService.createPet(customerId,convertToEntity(resource)));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PetResource> updatePet(@PathVariable("id") Long id, @RequestBody SavePetResource resource) throws Exception {
-        Pet pet = convertToEntity(resource);
-        pet.setId(id);
-        Pet petDB = petService.update(pet);
-        if (petDB == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(convertToResource(petDB));
+    @PutMapping("/customers/{customerId}/pets/{petId}")
+    public PetResource updatePet(@PathVariable(name = "customerId")Long customerId,
+                                 @PathVariable(name = "petId")Long petId,
+                                 @Valid @RequestBody SavePetResource resource){
+        return convertToResource(petService.updatePet(customerId,petId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<PetResource> deletePet(@PathVariable("id") Long id) throws Exception{
-        Pet petDB= petService.deleteById(id);
-        if (petDB == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(convertToResource(petDB));
+    @DeleteMapping("customers/{customerId}/pets/{petId}")
+    public ResponseEntity<?> deletePet(@PathVariable(name = "customerId")Long customerId,
+                                       @PathVariable(name = "petId")Long petId){
+        return petService.deletePet(customerId,petId);
     }
 
     private Pet convertToEntity(SavePetResource resource) {

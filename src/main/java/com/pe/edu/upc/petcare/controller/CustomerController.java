@@ -7,17 +7,18 @@ import com.pe.edu.upc.petcare.service.CustomerService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api")
 public class CustomerController {
 
     @Autowired
@@ -27,53 +28,33 @@ public class CustomerController {
     private CustomerService customerService;
 
 
-    @GetMapping
-    public ResponseEntity<List<CustomerResource>> getAllCustomers() throws Exception  {
-        List<Customer> customers = new ArrayList<>();
-
-        customers = customerService.findAll();
-        if (customers.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-       List<CustomerResource> resources = customers.stream().map(this::convertToResource).collect(Collectors.toList());
-
-        return ResponseEntity.ok(resources);
+    @GetMapping("/customers")
+    public Page<CustomerResource> getAllCustomers(Pageable pageable){
+        List<CustomerResource> customers = customerService.getAllCustomers(pageable)
+                .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        int customerCount = customers.size();
+        return new PageImpl<>(customers,pageable,customerCount);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CustomerResource> getCustomerById(@PathVariable("id") Long id) throws Exception{
-        Customer customerDB = customerService.findById(id);
-        if (customerDB == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(convertToResource(customerDB));
+    @GetMapping("/customers/{id}")
+    public CustomerResource getCustomerById(@PathVariable(name = "id")Long customerId){
+        return convertToResource(customerService.getCustomerById(customerId));
     }
 
-    @PostMapping
-    public ResponseEntity<CustomerResource> createCustomer(@Valid @RequestBody SaveCustomerResource saveCustomerResource)  throws Exception {
-        Customer customer =convertToEntity(saveCustomerResource);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToResource(customerService.save(customer)));
+    @PostMapping("/customers")
+    public CustomerResource createCustomer(@Valid @RequestBody SaveCustomerResource resource){
+        return convertToResource(customerService.createCustomer(convertToEntity(resource)));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CustomerResource> updateCustomer(@PathVariable("id") Long id, @RequestBody SaveCustomerResource resource) throws Exception {
-        Customer customer = convertToEntity(resource);
-        customer.setId(id);
-        Customer customerDB = customerService.update(customer);
-        if (customerDB == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(convertToResource(customerDB));
+    @PutMapping("/customers/{id}")
+    public CustomerResource updateCustomer(@PathVariable(name = "id")Long customerId,
+                                           @Valid @RequestBody SaveCustomerResource resource){
+        return convertToResource(customerService.updateCustomer(customerId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<CustomerResource> deleteCustomer(@PathVariable("id") Long id) throws Exception{
-        Customer customerDB= customerService.deleteById(id);
-        if (customerDB == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(convertToResource(customerDB));
+    @DeleteMapping("/customers/{id}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable(name = "id") Long customerId){
+        return customerService.deleteCustomer(customerId);
     }
 
     private Customer convertToEntity(SaveCustomerResource resource) {

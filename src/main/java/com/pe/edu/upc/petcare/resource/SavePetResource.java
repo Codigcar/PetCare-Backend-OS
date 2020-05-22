@@ -10,10 +10,9 @@ import javax.persistence.Id;
 @Setter
 public class SavePetResource {
 
-    private Long id;
     private String name;
     private String age;
     private String breed;
     private String photo;
-    private String sex;
+    private String gender;
 }
