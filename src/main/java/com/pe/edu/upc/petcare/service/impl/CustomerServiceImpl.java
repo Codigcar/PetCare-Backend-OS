@@ -1,10 +1,14 @@
 package com.pe.edu.upc.petcare.service.impl;
 
 
+import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
 import com.pe.edu.upc.petcare.model.Customer;
 import com.pe.edu.upc.petcare.repository.CustomerRepository;
 import com.pe.edu.upc.petcare.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,65 +18,42 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
-/*
+
     @Override
-    public List<Customer> findCustomerAll() {
-        return customerRepository.findAll();
+    public Page<Customer> getAllCustomers(Pageable pageable) {
+        return customerRepository.findAll(pageable);
+    }
+
+    @Override
+    public Customer getCustomerById(Long customerId) {
+        return customerRepository.findById(customerId)
+                .orElseThrow(()->new ResourceNotFoundException("Customer","Id",customerId));
     }
 
     @Override
     public Customer createCustomer(Customer customer) {
-        /*Customer customerDB= customerRepository.findByNumberId((customer.getNumberId()));
-        if (customerDB != null){
-            return customerDB;
-        }
-        customer.setState("CREATED");
-       // Customer customerDB = customerRepository.save(customer);
-        return customerRepository.save(customer);
-    }
-*/
-    @Override
-    public Customer save(Customer customer) throws Exception {
-        Customer customerDB= customerRepository.findById((customer.getId())).orElse(null);
-        if (customerDB != null){
-            return customerDB;
-        }
         return customerRepository.save(customer);
     }
 
     @Override
-    public Customer update(Customer customer) throws Exception {
-        Customer customerDB= customerRepository.findById(customer.getId()).orElse(null);
-        if (customerDB == null){
-            return null;
-        }
-        customerDB.setName(customer.getName());
-        return customerRepository.save(customerDB);
-    }
+    public Customer updateCustomer(Long customerId, Customer customerRequest) {
+        Customer customer=customerRepository.findById(customerId)
+                .orElseThrow(()->new ResourceNotFoundException("Customer","Id",customerId));
+        customer.setFirstName(customerRequest.getFirstName());
+        customer.setLastName(customerRequest.getLastName());
+        customer.setDocument(customerRequest.getDocument());
+        customer.setEmail(customerRequest.getEmail());
+        customer.setPhone(customerRequest.getPhone());
+        customer.setAge(customerRequest.getAge());
 
-
-
-    @Override
-    public Customer findById(Long id) throws Exception {
-        return customerRepository.findById(id).orElse(null);
-    }
-
-
-
-    @Override
-    public List<Customer> findAll() throws Exception {
-        return customerRepository.findAll();
+        return customerRepository.save(customer);
     }
 
     @Override
-    public Customer deleteById(Long id) throws Exception {
-        Customer customerDB= customerRepository.findById(id).orElse(null);
-
-        if (customerDB != null){
-            customerRepository.deleteById(customerDB.getId());
-            return customerDB;
-        }
-
-        return null;
+    public ResponseEntity<?> deleteCustomer(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(()->new ResourceNotFoundException("Customer","Id",customerId));
+        customerRepository.delete(customer);
+        return ResponseEntity.ok().build();
     }
 }
