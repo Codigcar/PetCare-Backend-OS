@@ -14,57 +14,57 @@ import org.springframework.stereotype.Service;
 public class ProviderRepresentativeServiceImpl implements ProviderRepresentativeService {
 
     @Autowired
-    private ProviderRepresentativeRepository providerrepresentativeRepository;
+    private ProviderRepresentativeRepository providerRepresentativeRepository;
     @Autowired
     private ProviderRepository providerRepository;
 
     @Override
     public Page<ProviderRepresentative> getAllProviderRepresentativesByProviderId(Long providerId, Pageable pageable) {
-        return providerrepresentativeRepository.findByProviderId(providerId,pageable);
+        return providerRepresentativeRepository.findByProviderId(providerId,pageable);
     }
 
     @Override
-    public ProviderRepresentative getProviderRepresentativeByIdAndProviderId(Long providerId, Long providerrepresentativeId) {
-        return providerrepresentativeRepository.findByIdAndProviderId(providerrepresentativeId,providerId)
+    public ProviderRepresentative getProviderRepresentativeByIdAndProviderId(Long providerId, Long providerRepresentativeId) {
+        return providerRepresentativeRepository.findByIdAndProviderId(providerRepresentativeId,providerId)
                 .orElseThrow(()->new ResourceNotFoundException(
-                        "Provider Representative not found with Id"+providerrepresentativeId+
+                        "Provider Representative not found with Id"+providerRepresentativeId+
                                 "and ProviderId"+providerId));
     }
 
     @Override
-    public ProviderRepresentative createProviderRepresentative(Long providerId, ProviderRepresentative providerrepresentative) {
+    public ProviderRepresentative createProviderRepresentative(Long providerId, ProviderRepresentative providerRepresentative) {
         return providerRepository.findById(providerId).map(provider-> {
-            providerrepresentative.setProvider(provider);
-            return providerrepresentativeRepository.save(providerrepresentative);
+            providerRepresentative.setProvider(provider);
+            return providerRepresentativeRepository.save(providerRepresentative);
         }).orElseThrow(()->new ResourceNotFoundException(
                 "Provider" + "Id" + providerId));
     }
 
     @Override
-    public ProviderRepresentative updateProviderRepresentative(Long providerId, Long providerrepresentativeId,
-                                                               ProviderRepresentative providerrepresentativeRequest) {
+    public ProviderRepresentative updateProviderRepresentative(Long providerId, Long providerRepresentativeId,
+                                                               ProviderRepresentative providerRepresentativeRequest) {
         if(!providerRepository.existsById(providerId))
             throw new ResourceNotFoundException("Provider","Id",providerId);
 
-        return providerrepresentativeRepository.findById(providerrepresentativeId).map(providerrepresentative -> {
-            providerrepresentative.setName(providerrepresentativeRequest.getName());
-            providerrepresentative.setLastName(providerrepresentativeRequest.getLastName());
-            providerrepresentative.setPosition(providerrepresentativeRequest.getPosition());
-            providerrepresentative.setPhone1(providerrepresentativeRequest.getPhone1());
-            providerrepresentative.setPhone2(providerrepresentativeRequest.getPhone2());
+        return providerRepresentativeRepository.findById(providerRepresentativeId).map(providerRepresentative -> {
+            providerRepresentative.setName(providerRepresentativeRequest.getName());
+            providerRepresentative.setLastName(providerRepresentativeRequest.getLastName());
+            providerRepresentative.setPosition(providerRepresentativeRequest.getPosition());
+            providerRepresentative.setPhone1(providerRepresentativeRequest.getPhone1());
+            providerRepresentative.setPhone2(providerRepresentativeRequest.getPhone2());
 
-            return providerrepresentativeRepository.save(providerrepresentative);
-        }).orElseThrow(()->new ResourceNotFoundException("ProviderRepresentative","Id",providerrepresentativeId));
+            return providerRepresentativeRepository.save(providerRepresentative);
+        }).orElseThrow(()->new ResourceNotFoundException("ProviderRepresentative","Id",providerRepresentativeId));
     }
 
     @Override
-    public ResponseEntity<?> deleteProviderRepresentative(Long providerId, Long providerrepresentativeId) {
-        return providerrepresentativeRepository.findByIdAndProviderId(providerrepresentativeId,providerId)
-                .map(providerrepresentative -> {
-            providerrepresentativeRepository.delete(providerrepresentative);
+    public ResponseEntity<?> deleteProviderRepresentative(Long providerId, Long providerRepresentativeId) {
+        return providerRepresentativeRepository.findByIdAndProviderId(providerRepresentativeId,providerId)
+                .map(providerRepresentative -> {
+            providerRepresentativeRepository.delete(providerRepresentative);
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException(
-                "Provider Representative not found with Id"+providerrepresentativeId+"and ProviderId"+providerId));
+                "Provider Representative not found with Id"+providerRepresentativeId+"and ProviderId"+providerId));
     }
 
 }

@@ -24,48 +24,48 @@ public class ProviderRepresentativeController {
     private ModelMapper mapper;
 
     @Autowired
-    private ProviderRepresentativeService providerrepresentativeService;
+    private ProviderRepresentativeService providerRepresentativeService;
 
-    @GetMapping("/provider/{providerId}/providerrepresentative")
+    @GetMapping("/providers/{providerId}/providersRepresentative")
     public Page<ProviderRepresentativeResource> getAllProviderRepresentativesByProviderId
             (@PathVariable(name = "providerId")Long providerId, Pageable pageable){
-        Page<ProviderRepresentative> providerrepresentativePage=providerrepresentativeService.
+        Page<ProviderRepresentative> providerRepresentativePage=providerRepresentativeService.
                 getAllProviderRepresentativesByProviderId(providerId,pageable);
-        List<ProviderRepresentativeResource>  resources=providerrepresentativePage.getContent().stream()
+        List<ProviderRepresentativeResource>  resources=providerRepresentativePage.getContent().stream()
                 .map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @GetMapping("/provider/{providerId}/providerrepresentative/{providerrepresentativeId}")
+    @GetMapping("/providers/{providerId}/providersRepresentative/{providerRepresentativeId}")
     public ProviderRepresentativeResource getProviderRepresentativeByIdAndProviderId
             (@PathVariable(name = "providerId")Long providerId,
-                                               @PathVariable(name = "providerrepresentativeId")
-                                                       Long providerrepresentativeId){
-        return convertToResource(providerrepresentativeService.getProviderRepresentativeByIdAndProviderId
-                (providerId,providerrepresentativeId));
+                                               @PathVariable(name = "providerRepresentativeId")
+                                                       Long providerRepresentativeId){
+        return convertToResource(providerRepresentativeService.getProviderRepresentativeByIdAndProviderId
+                (providerId,providerRepresentativeId));
     }
 
 
-    @PostMapping("provider/{providerId}/providerrepresentative")
+    @PostMapping("providers/{providerId}/providersRepresentative")
     public ProviderRepresentativeResource createProviderRepresentative
             (@PathVariable(name = "providerId")Long providerId,
                                  @Valid @RequestBody SaveProviderRepresentativeResource resource){
-        return convertToResource(providerrepresentativeService.createProviderRepresentative(providerId,convertToEntity(resource)));
+        return convertToResource(providerRepresentativeService.createProviderRepresentative(providerId,convertToEntity(resource)));
     }
 
-    @PutMapping("/provider/{providerId}/providerrepresentative/{providerrepresentativeId}")
+    @PutMapping("/providers/{providerId}/providersRepresentative/{providerRepresentativeId}")
     public ProviderRepresentativeResource updateProviderRepresentative
             (@PathVariable(name = "providerId")Long providerId,
-                                 @PathVariable(name = "providerrepresentativeId")Long providerrepsentativeId,
+                                 @PathVariable(name = "providerRepresentativeId")Long providerRepsentativeId,
                                  @Valid @RequestBody SaveProviderRepresentativeResource resource){
-        return convertToResource(providerrepresentativeService.updateProviderRepresentative
-                (providerId,providerrepsentativeId,convertToEntity(resource)));
+        return convertToResource(providerRepresentativeService.updateProviderRepresentative
+                (providerId,providerRepsentativeId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("/provider/{providerId}/providerrepresentative/{providerrepresentativeId}")
+    @DeleteMapping("/providers/{providerId}/providersRepresentative/{providerRepresentativeId}")
     public ResponseEntity<?> deleteProviderRepresentative(@PathVariable(name = "providerId")Long providerId,
-                                       @PathVariable(name = "providerrepresentativeId")Long providerrepresentativeId){
-        return providerrepresentativeService.deleteProviderRepresentative(providerId,providerrepresentativeId);
+                                       @PathVariable(name = "providerRepresentativeId")Long providerRepresentativeId){
+        return providerRepresentativeService.deleteProviderRepresentative(providerId,providerRepresentativeId);
     }
 
     private ProviderRepresentative convertToEntity(SaveProviderRepresentativeResource resource) {
