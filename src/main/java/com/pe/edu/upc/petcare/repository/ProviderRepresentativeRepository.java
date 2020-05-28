@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface ProviderRepresentativeRepository extends JpaRepository<ProviderRepresentative,Long>  {
 
     Page<ProviderRepresentative> findByProviderId(Long providerId, Pageable pageable);
-    Optional<ProviderRepresentative> findByIdAndProviderId(Long providerrepresentativeId, Long providerId);
+    Optional<ProviderRepresentative> findByIdAndProviderId(Long providerRepresentativeId, Long providerId);
 }

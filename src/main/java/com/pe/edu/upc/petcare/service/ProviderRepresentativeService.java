@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 public interface ProviderRepresentativeService {
 
     Page<ProviderRepresentative> getAllProviderRepresentativesByProviderId(Long providerId, Pageable pageable);
-    ProviderRepresentative getProviderRepresentativeByIdAndProviderId(Long providerId,Long providerrepresentativeId);
+    ProviderRepresentative getProviderRepresentativeByIdAndProviderId(Long providerId,Long providerRepresentativeId);
     ProviderRepresentative createProviderRepresentative(Long providerId,ProviderRepresentative pet);
-    ProviderRepresentative updateProviderRepresentative(Long providerId,Long petId,ProviderRepresentative providerrepresentativeRequest);
-    ResponseEntity<?> deleteProviderRepresentative(Long providerId, Long providerrepresentativeId);
+    ProviderRepresentative updateProviderRepresentative(Long providerId,Long petId,ProviderRepresentative providerRepresentativeRequest);
+    ResponseEntity<?> deleteProviderRepresentative(Long providerId, Long providerRepresentativeId);
 }
