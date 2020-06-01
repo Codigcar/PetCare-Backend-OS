@@ -31,7 +31,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @GetMapping("/providers/{providerId}/payments")
-    Page<PaymentResource> getAllPaymentsByProviderId(@PathVariable(name = "providerId")Long providerId,
+    public Page<PaymentResource> getAllPaymentsByProviderId(@PathVariable(name = "providerId")Long providerId,
                                              Pageable pageable)
     {
         Page<Payment> paymentPage=paymentService.getAllPaymentsByProviderId(providerId,pageable);

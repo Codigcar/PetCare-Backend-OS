@@ -7,9 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "service_type")
+@Table(name = "type_products")
 @Data
-public class ServiceType {
+public class TypeProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

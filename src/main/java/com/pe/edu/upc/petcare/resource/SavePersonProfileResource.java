@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-public class SaveCustomerResource {
+public class SavePersonProfileResource {
 
     private String firstName;
     private String lastName;
