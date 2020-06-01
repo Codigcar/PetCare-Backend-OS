@@ -17,8 +17,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "customers")
-public class Customer {
+@Table(name = "person_profile")
+public class PersonProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

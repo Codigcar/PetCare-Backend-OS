@@ -26,38 +26,38 @@ public class PetController {
     @Autowired
     private PetService petService;
 
-    @GetMapping("/customers/{customerId}/pets")
-    public Page<PetResource> getAllPetsByCustomerId(@PathVariable(name = "customerId")Long customerId,
+    @GetMapping("/people/{peopleId}/pets")
+    public Page<PetResource> getAllPetsByCustomerId(@PathVariable(name = "peopleId")Long peopleId,
                                                     Pageable pageable){
-        Page<Pet> petPage=petService.getAllPetsByCustomerId(customerId,pageable);
+        Page<Pet> petPage=petService.getAllPetsByPersonProfileId(peopleId,pageable);
         List<PetResource>  resources=petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @GetMapping("/customers/{customerId}/pets/{petId}")
-    public PetResource getPetByIdAndCustomerId(@PathVariable(name = "customerId")Long customerId,
+    @GetMapping("/people/{peopleId}/pets/{petId}")
+    public PetResource getPetByIdAndCustomerId(@PathVariable(name = "peopleId")Long peopleId,
                                                @PathVariable(name = "petId")Long petId){
-        return convertToResource(petService.getPetByIdAndCustomerId(customerId,petId));
+        return convertToResource(petService.getPetByIdAndPersonProfileId(peopleId,petId));
     }
 
 
-    @PostMapping("/customers/{customerId}/pets")
-    public PetResource createPet(@PathVariable(name = "customerId")Long customerId,
+    @PostMapping("/people/{peopleId}/pets")
+    public PetResource createPet(@PathVariable(name = "peopleId")Long peopleId,
                                  @Valid @RequestBody SavePetResource resource){
-        return convertToResource(petService.createPet(customerId,convertToEntity(resource)));
+        return convertToResource(petService.createPet(peopleId,convertToEntity(resource)));
     }
 
-    @PutMapping("/customers/{customerId}/pets/{petId}")
-    public PetResource updatePet(@PathVariable(name = "customerId")Long customerId,
+    @PutMapping("/people/{peopleId}/pets/{petId}")
+    public PetResource updatePet(@PathVariable(name = "peopleId")Long peopleId,
                                  @PathVariable(name = "petId")Long petId,
                                  @Valid @RequestBody SavePetResource resource){
-        return convertToResource(petService.updatePet(customerId,petId,convertToEntity(resource)));
+        return convertToResource(petService.updatePet(peopleId,petId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("customers/{customerId}/pets/{petId}")
-    public ResponseEntity<?> deletePet(@PathVariable(name = "customerId")Long customerId,
+    @DeleteMapping("people/{peopleId}/pets/{petId}")
+    public ResponseEntity<?> deletePet(@PathVariable(name = "peopleId")Long peopleId,
                                        @PathVariable(name = "petId")Long petId){
-        return petService.deletePet(customerId,petId);
+        return petService.deletePet(peopleId,petId);
     }
 
     private Pet convertToEntity(SavePetResource resource) {

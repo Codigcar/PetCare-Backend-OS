@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ServiceTypeResource {
+public class TypeProductResource {
     private Long id;
     private String name;
 }

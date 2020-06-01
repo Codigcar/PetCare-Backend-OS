@@ -1,9 +1,8 @@
 package com.pe.edu.upc.petcare.service.impl;
 
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
-import com.pe.edu.upc.petcare.model.Customer;
 import com.pe.edu.upc.petcare.model.Pet;
-import com.pe.edu.upc.petcare.repository.CustomerRepository;
+import com.pe.edu.upc.petcare.repository.PersonProfileRepository;
 import com.pe.edu.upc.petcare.repository.PetRepository;
 import com.pe.edu.upc.petcare.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +17,34 @@ public class PetServiceImpl implements PetService {
     @Autowired
     private PetRepository petRepository;
     @Autowired
-    private CustomerRepository customerRepository;
+    private PersonProfileRepository personProfileRepository;
 
     @Override
-    public Page<Pet> getAllPetsByCustomerId(Long customerId, Pageable pageable) {
-        return petRepository.findByCustomerId(customerId,pageable);
+    public Page<Pet> getAllPetsByPersonProfileId(Long personId, Pageable pageable) {
+        return petRepository.findByPersonProfileId(personId,pageable);
     }
 
     @Override
-    public Pet getPetByIdAndCustomerId(Long customerId, Long petId) {
-        return petRepository.findByIdAndCustomerId(petId,customerId)
+    public Pet getPetByIdAndPersonProfileId(Long personId, Long petId) {
+        return petRepository.findByIdAndPersonProfileId(petId,personId)
                 .orElseThrow(()->new ResourceNotFoundException(
                         "Pet not found with Id"+petId+
-                                "and CustomerId"+customerId));
+                                "and CustomerId"+personId));
     }
 
     @Override
-    public Pet createPet(Long customerId, Pet pet) {
-        return customerRepository.findById(customerId).map(customer -> {
-            pet.setCustomer(customer);
+    public Pet createPet(Long personId, Pet pet) {
+        return personProfileRepository.findById(personId).map(customer -> {
+            pet.setPersonProfile(customer);
             return petRepository.save(pet);
         }).orElseThrow(()->new ResourceNotFoundException(
-                "Customer" + "Id" + customerId));
+                "Customer" + "Id" + personId));
     }
 
     @Override
-    public Pet updatePet(Long customerId, Long petId, Pet petRequest) {
-        if(!customerRepository.existsById(customerId))
-            throw new ResourceNotFoundException("Customer","Id",customerId);
+    public Pet updatePet(Long personId, Long petId, Pet petRequest) {
+        if(!personProfileRepository.existsById(personId))
+            throw new ResourceNotFoundException("Customer","Id",personId);
 
         return petRepository.findById(petId).map(pet -> {
             pet.setName(petRequest.getName());
@@ -59,11 +58,11 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public ResponseEntity<?> deletePet(Long customerId, Long petId) {
-        return petRepository.findByIdAndCustomerId(petId,customerId).map(pet -> {
+    public ResponseEntity<?> deletePet(Long personId, Long petId) {
+        return petRepository.findByIdAndPersonProfileId(petId,personId).map(pet -> {
             petRepository.delete(pet);
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException(
-                "Pet not found with Id"+petId+"and CustomerId"+customerId));
+                "Pet not found with Id"+petId+"and CustomerId"+personId));
     }
 }

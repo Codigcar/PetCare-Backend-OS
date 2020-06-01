@@ -2,7 +2,6 @@ package com.pe.edu.upc.petcare.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +10,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -48,10 +45,10 @@ public class Pet {
 
     //Relationships
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "customer_id",nullable = false)
+    @JoinColumn(name = "person_profile_Id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Customer customer;
+    private PersonProfile personProfile;
 
 
 }
