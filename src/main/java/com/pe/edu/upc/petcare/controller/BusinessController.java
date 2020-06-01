@@ -28,12 +28,8 @@ public class BusinessController {
     @Autowired
     private BusinessProfileService businessProfileService;
 
-    @Autowired
-    private ProviderService providerService;
-
     @PostMapping
     public BusinessProfileResource create( @RequestBody SaveBusinessProfileResource resource){
-     //   Provider provider = providerService.
         return convertToResource(businessProfileService.create(convertToEntity(resource)));
     }
 
