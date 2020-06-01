@@ -43,10 +43,12 @@ public class PersonProfile extends Profile {
     @Column(unique = true,nullable = false)
     private String email;
 
+    @NotEmpty(message = "the age can't be empty")
+    private String age;
+
     @NotEmpty(message = "the phone number can't be empty")
     @Size(min = 9, max = 9, message = "the phone number size is 9")
     private String phone;
 
-    @NotEmpty(message = "the age can't be empty")
-    private String age;
+    
 }
