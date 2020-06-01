@@ -23,7 +23,7 @@ public class PersonProfileServiceImpl implements PersonProfileService {
     }
 
     @Override
-    public PersonProfile getCustomerById(Long customerId) {
+    public PersonProfile getPersonById(Long customerId) {
         return personProfileRepository.findById(customerId)
                 .orElseThrow(()->new ResourceNotFoundException("Customer","Id",customerId));
     }

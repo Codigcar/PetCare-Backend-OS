@@ -38,7 +38,7 @@ public class PersonProfileController {
 
     @GetMapping("/people/{id}")
     public PersonProfileResource getCustomerById(@PathVariable(name = "id")Long peopleId){
-        return convertToResource(personProfileService.getCustomerById(peopleId));
+        return convertToResource(personProfileService.getPersonById(peopleId));
     }
 
     @PostMapping("/people")
