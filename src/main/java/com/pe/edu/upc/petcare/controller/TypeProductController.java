@@ -1,7 +1,7 @@
 package com.pe.edu.upc.petcare.controller;
 
 import com.pe.edu.upc.petcare.model.TypeProduct;
-import com.pe.edu.upc.petcare.resource.SaveTypeProductResource;
+import com.pe.edu.upc.petcare.resource.save.SaveTypeProductResource;
 import com.pe.edu.upc.petcare.resource.TypeProductResource;
 import com.pe.edu.upc.petcare.service.TypeProductService;
 import org.modelmapper.ModelMapper;

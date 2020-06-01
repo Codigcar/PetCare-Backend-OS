@@ -2,7 +2,7 @@ package com.pe.edu.upc.petcare.controller;
 
 import com.pe.edu.upc.petcare.model.PersonProfile;
 import com.pe.edu.upc.petcare.resource.PersonProfileResource;
-import com.pe.edu.upc.petcare.resource.SavePersonProfileResource;
+import com.pe.edu.upc.petcare.resource.save.SavePersonProfileResource;
 import com.pe.edu.upc.petcare.service.PersonProfileService;
 
 import org.modelmapper.ModelMapper;

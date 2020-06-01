@@ -1,14 +1,9 @@
 package com.pe.edu.upc.petcare.controller;
 
 import com.pe.edu.upc.petcare.model.Payment;
-import com.pe.edu.upc.petcare.model.Pet;
 import com.pe.edu.upc.petcare.resource.PaymentResource;
-import com.pe.edu.upc.petcare.resource.PetResource;
-import com.pe.edu.upc.petcare.resource.SavePaymentResource;
-import com.pe.edu.upc.petcare.resource.SavePetResource;
+import com.pe.edu.upc.petcare.resource.save.SavePaymentResource;
 import com.pe.edu.upc.petcare.service.PaymentService;
-import com.pe.edu.upc.petcare.service.PetService;
-import com.pe.edu.upc.petcare.service.ProviderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

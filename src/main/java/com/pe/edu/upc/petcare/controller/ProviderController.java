@@ -2,7 +2,7 @@ package com.pe.edu.upc.petcare.controller;
 
 import com.pe.edu.upc.petcare.model.Provider;
 import com.pe.edu.upc.petcare.resource.ProviderResource;
-import com.pe.edu.upc.petcare.resource.SaveProviderResource;
+import com.pe.edu.upc.petcare.resource.save.SaveProviderResource;
 import com.pe.edu.upc.petcare.service.ProviderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/business/{businessId}/providers")
 public class ProviderController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private ProviderService providerService;
 
-    @GetMapping("/providers")
+    @GetMapping
     public Page<ProviderResource> getAllProviders(Pageable pageable){
         List<ProviderResource> providers = providerService.getAllProviders(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
@@ -32,25 +32,26 @@ public class ProviderController {
         return new PageImpl<>(providers,pageable,providersCount);
     }
 
-    @GetMapping("/providers/{providerId}")
+    @GetMapping("/{providerId}")
     public ProviderResource getProviderById(@PathVariable(name = "providerId")Long providerId){
         return convertToResource(providerService.getProviderById(providerId));
     }
 
-    @PostMapping("/providers")
+    @PostMapping
     public ProviderResource createProvider(@Valid @RequestBody SaveProviderResource resource){
         Provider provider=convertToEntity(resource);
         return convertToResource(providerService.createProvider(provider));
     }
 
-    @PutMapping("/providers/{providerId}")
-    public ProviderResource updateProvider(@PathVariable(name = "providerId")Long providerId,
-                                           @Valid @RequestBody SaveProviderResource resource){
+    @PutMapping("/{providerId}")
+    public ProviderResource updateProvider( @PathVariable("businessId") Long businessId,
+                                            @PathVariable(name = "providerId")Long providerId,
+                                            @Valid @RequestBody SaveProviderResource resource){
         Provider provider=convertToEntity(resource);
         return convertToResource(providerService.updateProvider(providerId,provider));
     }
 
-    @DeleteMapping("/providers/{providerId}")
+    @DeleteMapping("/{providerId}")
     public ResponseEntity<?> deleteProvider(@PathVariable(name ="providerId")Long providerId){
         return providerService.deleteProvider(providerId);
     }

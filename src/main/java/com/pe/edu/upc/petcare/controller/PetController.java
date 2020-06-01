@@ -2,7 +2,7 @@ package com.pe.edu.upc.petcare.controller;
 
 import com.pe.edu.upc.petcare.model.Pet;
 import com.pe.edu.upc.petcare.resource.PetResource;
-import com.pe.edu.upc.petcare.resource.SavePetResource;
+import com.pe.edu.upc.petcare.resource.save.SavePetResource;
 import com.pe.edu.upc.petcare.service.PetService;
 
 import org.modelmapper.ModelMapper;
