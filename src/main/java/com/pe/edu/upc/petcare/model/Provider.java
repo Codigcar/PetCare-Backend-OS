@@ -1,14 +1,20 @@
 package com.pe.edu.upc.petcare.model;
 
-import lombok.Data;
+import javafx.scene.NodeBuilder;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name = "providers")
 @Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
+@Table(name = "providers")
 public class Provider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,5 +44,7 @@ public class Provider {
     @NotEmpty(message = "the description can't be empty")
     @Column(name = "description",nullable = false)
     private String description;
+
+
 
 }

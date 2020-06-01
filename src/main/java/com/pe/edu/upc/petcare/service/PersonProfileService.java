@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface PersonProfileService {
     Page<PersonProfile> getAllCustomers(Pageable pageable);
-    PersonProfile getCustomerById(Long customerId);
+    PersonProfile getPersonById(Long personId);
     PersonProfile createCustomer(PersonProfile personProfile);
     PersonProfile updateCustomer(Long customerId, PersonProfile personProfileRequest);
     ResponseEntity<?> deleteCustomer(Long customerId);
