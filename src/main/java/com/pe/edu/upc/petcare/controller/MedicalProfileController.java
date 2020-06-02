@@ -7,6 +7,7 @@ import com.pe.edu.upc.petcare.resource.save.SaveMedicalProfileResource;
 import com.pe.edu.upc.petcare.service.PersonProfileService;
 import com.pe.edu.upc.petcare.service.PetService;
 import com.pe.edu.upc.petcare.service.MedicalProfileService;
+import com.pe.edu.upc.petcare.service.ProviderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,9 @@ public class MedicalProfileController {
     @Autowired
     private PersonProfileService personProfileService;
 
+    @Autowired
+    private ProviderService providerProfileService;
+
 
     //   @GetMapping("customers/{customerId}/pets/{petId}/profiles")
     //   public Page<ProfileResource> getAllProfilesByPetId(@PathVariable(name = "petId")Long petId,
@@ -58,12 +62,12 @@ public class MedicalProfileController {
 
 
     @PostMapping
-    public MedicalProfileResource createProfile(@PathVariable(name = "petId")Long petId, @PathVariable(name = "personId")Long customerId,
+    public MedicalProfileResource createProfile(@PathVariable(name = "providerId")Long providerId,@PathVariable(name = "petId")Long petId, @PathVariable(name = "personId")Long customerId,
                                                 @Valid @RequestBody SaveMedicalProfileResource resource){
 
         personProfileService.getPersonById(customerId);
         petService.getPetByIdAndPersonProfileId(customerId,petId);
-        return convertToResource(medicalProfileService.createProfile(petId,convertToEntity(resource)));
+        return convertToResource(medicalProfileService.createProfile(petId, providerProfileService.getProviderById(providerId),convertToEntity(resource)));
     }
 
     @PutMapping("{petprofileId}")

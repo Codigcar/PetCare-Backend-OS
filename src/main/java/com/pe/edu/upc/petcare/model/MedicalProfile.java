@@ -82,6 +82,10 @@ public class MedicalProfile {
     @JsonIgnore
     private Pet pet ;
 
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="provider_id")
+    @JsonIgnore
+    private Provider provider ;
 
 
 

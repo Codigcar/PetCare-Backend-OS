@@ -2,6 +2,7 @@ package com.pe.edu.upc.petcare.service.impl;
 
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
 import com.pe.edu.upc.petcare.model.MedicalProfile;
+import com.pe.edu.upc.petcare.model.Provider;
 import com.pe.edu.upc.petcare.repository.PetRepository;
 import com.pe.edu.upc.petcare.repository.MedicalProfileRepository;
 import com.pe.edu.upc.petcare.service.MedicalProfileService;
@@ -34,9 +35,10 @@ public class MedicalProfileServiceImpl implements MedicalProfileService {
     }
 
     @Override
-    public MedicalProfile createProfile(Long petId, MedicalProfile medicalProfile) {
+    public MedicalProfile createProfile(Long petId, Provider provider, MedicalProfile medicalProfile) {
         return petRepository.findById(petId).map(pet -> {
             medicalProfile.setPet(pet);
+            medicalProfile.setProvider(provider);
             return medicalProfileRepository.save(medicalProfile);
         }).orElseThrow(()->new ResourceNotFoundException(
                 "Pet" + "Id" + petId));
