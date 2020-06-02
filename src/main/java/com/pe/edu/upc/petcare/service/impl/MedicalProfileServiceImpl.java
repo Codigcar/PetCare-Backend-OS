@@ -45,7 +45,7 @@ public class MedicalProfileServiceImpl implements MedicalProfileService {
     }
 
     @Override
-    public MedicalProfile updateProfile(Long petId, Long profileId, MedicalProfile medicalProfileRequest) {
+    public MedicalProfile updateProfile(Long petId, Provider provider,Long profileId, MedicalProfile medicalProfileRequest) {
         if(!petRepository.existsById(petId))
             throw new ResourceNotFoundException("Pet","Id",petId);
 
@@ -61,7 +61,7 @@ public class MedicalProfileServiceImpl implements MedicalProfileService {
             profile.setDescription(medicalProfileRequest.getDescription());
             profile.setPhoto(medicalProfileRequest.getPhoto());
             profile.setAge(medicalProfileRequest.getAge());
-
+            profile.setProvider(provider);
             return medicalProfileRepository.save(profile);
         }).orElseThrow(()->new ResourceNotFoundException("Profile","Id",profileId));
     }

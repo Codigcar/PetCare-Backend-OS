@@ -71,19 +71,19 @@ public class MedicalProfileController {
     }
 
     @PutMapping("{petprofileId}")
-    public MedicalProfileResource updateProfile(@PathVariable(name = "petId")Long petId, @PathVariable(name = "personId")Long customerId,
-                                                @PathVariable(name = "profileId")Long profileId,
+    public MedicalProfileResource updateProfile(@PathVariable(name = "providerId")Long providerId,@PathVariable(name = "petId")Long petId, @PathVariable(name = "personId")Long customerId,
+                                                @PathVariable(name = "petprofileId")Long profileId,
                                                 @Valid @RequestBody SaveMedicalProfileResource resource){
 
         personProfileService.getPersonById(customerId);
         petService.getPetByIdAndPersonProfileId(customerId,petId);
-        return convertToResource(medicalProfileService.updateProfile(petId,profileId,convertToEntity(resource)));
+        return convertToResource(medicalProfileService.updateProfile(petId,providerProfileService.getProviderById(providerId),profileId,convertToEntity(resource)));
     }
 
 
     @DeleteMapping("{petprofileId}")
     public ResponseEntity<?> deleteProfile(@PathVariable(name = "petId")Long petId,@PathVariable(name = "personId")Long customerId,
-                                       @PathVariable(name = "profileId")Long profileId){
+                                       @PathVariable(name = "petprofileId")Long profileId){
 
         personProfileService.getPersonById(customerId);
         petService.getPetByIdAndPersonProfileId(customerId,petId);

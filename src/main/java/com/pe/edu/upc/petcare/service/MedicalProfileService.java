@@ -11,6 +11,6 @@ public interface MedicalProfileService {
     Page<MedicalProfile> getAllProfilesByPetId(Long petId, Pageable pageable);
     MedicalProfile getProfileByIdAndPetId(Long petId, Long profileId);
     MedicalProfile createProfile(Long petId, Provider provider, MedicalProfile medicalProfile);
-    MedicalProfile updateProfile(Long petId, Long profileId, MedicalProfile medicalProfileRequest);
+    MedicalProfile updateProfile(Long petId,Provider provider, Long profileId, MedicalProfile medicalProfileRequest);
     ResponseEntity<?> deleteProfile(Long petId,Long profileId);
 }
