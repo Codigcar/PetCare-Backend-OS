@@ -19,4 +19,5 @@ public class RolServiceImpl implements RolService {
     {
         return rolRepository.save(rol);
     }
+
 }

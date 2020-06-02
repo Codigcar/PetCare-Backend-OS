@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account,Long> {
 
+    //
     Page<Account> findByRolId(Long rolId, Pageable pageable);
     Optional<Account> findByIdAndRolId(Long accountId, Long rolId);
 }

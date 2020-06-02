@@ -10,5 +10,6 @@ public class AccountResource {
     private Long id;
     private String user;
     private String password;
+    //
 
 }

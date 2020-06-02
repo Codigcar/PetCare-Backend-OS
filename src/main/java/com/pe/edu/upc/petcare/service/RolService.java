@@ -10,4 +10,5 @@ import org.springframework.data.domain.Pageable;
 public interface RolService {
 
     Rol createRol (Rol rol);
+
 }

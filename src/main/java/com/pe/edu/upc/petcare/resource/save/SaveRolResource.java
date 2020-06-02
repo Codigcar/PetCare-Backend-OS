@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class SaveRolResource {
 
+    //
     private Long id;
     private String name;
 }

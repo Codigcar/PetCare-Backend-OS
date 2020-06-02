@@ -32,7 +32,7 @@ public class Account {
     @Column(name = "password",nullable = false)
     private String password;
 
-    //Relationships
+    ////Relationships
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "rol_Id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

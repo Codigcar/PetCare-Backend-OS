@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface AccountService {
 
+    //
     Page<Account> getAllAccountsByRolId(Long rolId, Pageable pageable);
     Account getAccountByIdAndRolId(Long rolId,Long accountId);
     Account createAccountService(Long rolId,Account account);

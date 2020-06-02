@@ -10,4 +10,5 @@ public class RolResource {
 
     private Long id;
     private String name;
+
 }
