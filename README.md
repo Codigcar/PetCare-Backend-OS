@@ -1,2 +1,2 @@
-# PetCare-Backend-OS
+# PetCare-Backend-OpenSource
 Backend Open Source
