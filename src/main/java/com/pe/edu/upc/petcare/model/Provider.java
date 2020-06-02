@@ -1,11 +1,13 @@
 package com.pe.edu.upc.petcare.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.scene.NodeBuilder;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @Entity
@@ -45,6 +47,12 @@ public class Provider {
     @Column(name = "description",nullable = false)
     private String description;
 
-
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(name = "providers_products",
+            joinColumns = {@JoinColumn(name = "provider_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    @JsonIgnore
+    List<Product> products;
 
 }

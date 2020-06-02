@@ -32,7 +32,7 @@ public class Pet {
     private String age;
 
     @NotEmpty(message = "the breed can't be empty")
-    @Column(name = "breed",unique = true,nullable = false)
+    @Column(name = "breed",nullable = false)
     private String breed;
 
     @NotEmpty(message = "The photo can't be empty")
@@ -40,7 +40,7 @@ public class Pet {
     private String photo;
 
     @NotEmpty(message = "the gender can't be empty")
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     private String gender;
 
     //Relationships

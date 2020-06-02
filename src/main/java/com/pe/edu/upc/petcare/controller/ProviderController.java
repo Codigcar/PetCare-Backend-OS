@@ -1,11 +1,13 @@
 package com.pe.edu.upc.petcare.controller;
 
 import com.pe.edu.upc.petcare.model.Provider;
+import com.pe.edu.upc.petcare.resource.ProductResource;
 import com.pe.edu.upc.petcare.resource.ProviderResource;
 import com.pe.edu.upc.petcare.resource.save.SaveProviderResource;
 import com.pe.edu.upc.petcare.service.ProviderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.data.domain.Page;
 import javax.validation.Valid;
 import org.springframework.data.domain.PageImpl;
@@ -54,6 +56,18 @@ public class ProviderController {
     @DeleteMapping("/{providerId}")
     public ResponseEntity<?> deleteProvider(@PathVariable(name ="providerId")Long providerId){
         return providerService.deleteProvider(providerId);
+    }
+
+    @PostMapping("/{providerId}/products/{productId}")
+    public ProviderResource assignProviderProduct(@PathVariable(name = "providerId")Long providerId,
+                                                 @PathVariable(name = "productId")Long productId){
+        return convertToResource(providerService.assignProviderProduct(providerId,productId));
+    }
+
+    @DeleteMapping("/{providerId}/products/{productId}")
+    public ProviderResource deallocateProviderProduct(@PathVariable(name = "providerId")Long providerId,
+                                                      @PathVariable(name = "productId")Long productId){
+        return convertToResource(providerService.deallocateProviderProduct(providerId,productId));
     }
 
     private Provider convertToEntity(SaveProviderResource resource) {
