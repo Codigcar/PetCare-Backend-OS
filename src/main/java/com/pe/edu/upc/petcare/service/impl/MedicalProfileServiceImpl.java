@@ -1,7 +1,10 @@
+
+
 package com.pe.edu.upc.petcare.service.impl;
 
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
 import com.pe.edu.upc.petcare.model.MedicalProfile;
+import com.pe.edu.upc.petcare.model.Provider;
 import com.pe.edu.upc.petcare.repository.PetRepository;
 import com.pe.edu.upc.petcare.repository.MedicalProfileRepository;
 import com.pe.edu.upc.petcare.service.MedicalProfileService;
@@ -34,16 +37,17 @@ public class MedicalProfileServiceImpl implements MedicalProfileService {
     }
 
     @Override
-    public MedicalProfile createProfile(Long petId, MedicalProfile medicalProfile) {
+    public MedicalProfile createProfile(Long petId, Provider provider, MedicalProfile medicalProfile) {
         return petRepository.findById(petId).map(pet -> {
             medicalProfile.setPet(pet);
+            medicalProfile.setProvider(provider);
             return medicalProfileRepository.save(medicalProfile);
         }).orElseThrow(()->new ResourceNotFoundException(
                 "Pet" + "Id" + petId));
     }
 
     @Override
-    public MedicalProfile updateProfile(Long petId, Long profileId, MedicalProfile medicalProfileRequest) {
+    public MedicalProfile updateProfile(Long petId, Provider provider,Long profileId, MedicalProfile medicalProfileRequest) {
         if(!petRepository.existsById(petId))
             throw new ResourceNotFoundException("Pet","Id",petId);
 
@@ -59,7 +63,7 @@ public class MedicalProfileServiceImpl implements MedicalProfileService {
             profile.setDescription(medicalProfileRequest.getDescription());
             profile.setPhoto(medicalProfileRequest.getPhoto());
             profile.setAge(medicalProfileRequest.getAge());
-
+            profile.setProvider(provider);
             return medicalProfileRepository.save(profile);
         }).orElseThrow(()->new ResourceNotFoundException("Profile","Id",profileId));
     }
@@ -74,3 +78,6 @@ public class MedicalProfileServiceImpl implements MedicalProfileService {
     }
 
 }
+
+
+
