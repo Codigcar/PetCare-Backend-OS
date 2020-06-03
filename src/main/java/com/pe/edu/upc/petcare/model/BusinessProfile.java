@@ -28,7 +28,7 @@ public class BusinessProfile extends Profile {
 
     @NotEmpty(message = "the first name can't be empty")
     @Column(name = "name",nullable = false)
-    private String Name;
+    private String name;
 
     private String password;
 

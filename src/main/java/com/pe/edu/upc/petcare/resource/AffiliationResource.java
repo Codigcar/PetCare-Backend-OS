@@ -14,10 +14,6 @@ import javax.persistence.*;
 @Setter
 public class AffiliationResource {
     private Long id;
-
-
     private PersonProfile person;
-
-
     private Provider provider;
 }

@@ -13,25 +13,17 @@ import javax.validation.constraints.Size;
 @Setter
 public class SaveBusinessProfileResource {
 
-    @NotEmpty(message = "the first name can't be empty")
     private String firstName;
 
-    @NotEmpty(message = "the last name can't be empty")
     private String lastName;
 
-    @NotEmpty(message = "the document identity document can't be empty")
-    @Size(min = 8, max = 8, message = "the size of the identity document is 8")
     private String document;
 
-    @NotEmpty(message = "the email can't be empty")
-    @Email(message = "it is not a valid email address")
     private String email;
 
-    @NotEmpty(message = "the phone number can't be empty")
-    private String phone;
+     private String phone;
 
-    @NotEmpty(message = "the age can't be empty")
-    private String age;
+   private String age;
 
     private boolean owner;
 

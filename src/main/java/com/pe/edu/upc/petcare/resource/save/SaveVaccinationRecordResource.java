@@ -8,8 +8,8 @@ import lombok.Setter;
 public class SaveVaccinationRecordResource {
 
 
-    private String Name ;
-    private String Description ;
-    private String Create_at ;
+    private String name ;
+    private String description ;
+    private String create_at ;
 
 }

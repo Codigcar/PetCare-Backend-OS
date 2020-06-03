@@ -55,7 +55,7 @@ public class MedicalProfileServiceImpl implements MedicalProfileService {
             profile.setName(medicalProfileRequest.getName());
             profile.setWeight(medicalProfileRequest.getWeight());
             profile.setHeight(medicalProfileRequest.getHeight());
-            profile.setLenght(medicalProfileRequest.getLenght());
+            profile.setLength(medicalProfileRequest.getLength());
             profile.setEyes(medicalProfileRequest.getEyes());
             profile.setBreed(medicalProfileRequest.getBreed());
             profile.setGender(medicalProfileRequest.getGender());
