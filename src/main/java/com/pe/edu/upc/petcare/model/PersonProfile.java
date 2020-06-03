@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +28,10 @@ public class PersonProfile extends Profile {
     private Long id;
 
     @NotEmpty(message = "the first name can't be empty")
-    @Column(name = "first_name",nullable = false)
-    private String firstName;
+    @Column(name = "name",nullable = false)
+    private String name;
+
+    private String password;
 
     @NotEmpty(message = "the last name can't be empty")
     @Column(name = "last_name",nullable = false)
@@ -50,5 +54,11 @@ public class PersonProfile extends Profile {
     @Size(min = 9, max = 9, message = "the phone number size is 9")
     private String phone;
 
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Account account;
     
 }

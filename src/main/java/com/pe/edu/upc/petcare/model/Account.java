@@ -38,4 +38,10 @@ public class Account {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Rol rol;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "subscription_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private SubscriptionPlan subscriptionPlan;
 }

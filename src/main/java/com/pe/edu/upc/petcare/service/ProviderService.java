@@ -11,6 +11,6 @@ public interface ProviderService {
     Page<Provider> getAllProviders(Pageable pageable);
     Provider getProviderById(Long providerId);
     Provider createProvider(Provider provider);
-    Provider updateProvider(Long providerId,Provider providerRequest);
+    Provider updateProvider(Long businessId,Long providerId,Provider providerRequest);
     ResponseEntity<?> deleteProvider(Long providerId);
 }

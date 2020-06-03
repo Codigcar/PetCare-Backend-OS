@@ -1,10 +1,13 @@
 package com.pe.edu.upc.petcare.service.impl;
 
+import com.pe.edu.upc.petcare.model.Account;
 import com.pe.edu.upc.petcare.model.BusinessProfile;
 import com.pe.edu.upc.petcare.model.PersonProfile;
 import com.pe.edu.upc.petcare.model.Provider;
+import com.pe.edu.upc.petcare.repository.AccountRepository;
 import com.pe.edu.upc.petcare.repository.BusinessProfileRepository;
 import com.pe.edu.upc.petcare.repository.ProviderRepository;
+import com.pe.edu.upc.petcare.repository.RolRepository;
 import com.pe.edu.upc.petcare.service.BusinessProfileService;
 import com.pe.edu.upc.petcare.service.PersonProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +25,17 @@ public class BusinessProfileServiceImpl implements BusinessProfileService {
     @Autowired
     private ProviderRepository providerRepository;
 
+    @Autowired
+    private RolRepository rolRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+
     @Override
     public BusinessProfile create(BusinessProfile businessProfile) {
+
+        Account account = new Account();
 
         if (businessProfile.isOwner()){
             Provider provider = new Provider();
@@ -32,8 +44,8 @@ public class BusinessProfileServiceImpl implements BusinessProfileService {
             provider.setDescription("description");
             provider.setEmail("email@email");
             provider.setField("field");
-            provider.setRegion("region                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ");
-
+            provider.setRegion("region");
+            provider.setSubscriptionPlan(1);
             providerRepository.save(provider);
 
             businessProfile.setProvider(provider);
@@ -43,6 +55,17 @@ public class BusinessProfileServiceImpl implements BusinessProfileService {
             businessProfile.setProvider(provider);
         }
 
+
+        account.setUser(businessProfile.getEmail());
+        account.setPassword(businessProfile.getPassword());
+
+        account.setRol(rolRepository.findById((long) 2).orElse(null));
+
+        accountRepository.save(account);
+
+        businessProfile.setAccount(account);
+
         return businessProfileRepository.save(businessProfile);
+
     }
 }

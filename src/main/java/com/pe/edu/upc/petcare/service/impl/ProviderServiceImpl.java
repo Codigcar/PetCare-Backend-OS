@@ -1,8 +1,10 @@
 package com.pe.edu.upc.petcare.service.impl;
 
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
+import com.pe.edu.upc.petcare.model.BusinessProfile;
 import com.pe.edu.upc.petcare.model.Product;
 import com.pe.edu.upc.petcare.model.Provider;
+import com.pe.edu.upc.petcare.repository.BusinessProfileRepository;
 import com.pe.edu.upc.petcare.repository.ProductRepository;
 import com.pe.edu.upc.petcare.repository.ProviderRepository;
 import com.pe.edu.upc.petcare.service.ProviderService;
@@ -20,6 +22,9 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private BusinessProfileRepository businessProfileRepository;
 
     @Override
     public Provider assignProviderProduct(Long providerId, Long productId) {
@@ -61,7 +66,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public Provider updateProvider(Long providerId, Provider providerRequest) {
+    public Provider updateProvider(Long businessId,Long providerId, Provider providerRequest) {
         Provider provider=providerRepository.findById(providerId)
                 .orElseThrow(()->new ResourceNotFoundException("Provider","Id",providerId));
         provider.setBusinessName(providerRequest.getBusinessName());
@@ -70,6 +75,9 @@ public class ProviderServiceImpl implements ProviderService {
         provider.setField(providerRequest.getField());
         provider.setEmail(providerRequest.getEmail());
         provider.setDescription(provider.getDescription());
+        provider.setSubscriptionPlan(provider.getSubscriptionPlan());
+
+
 
         return providerRepository.save(provider);
     }
