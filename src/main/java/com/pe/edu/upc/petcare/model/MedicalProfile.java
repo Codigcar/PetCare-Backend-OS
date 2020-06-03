@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "medicalprofile")
+@Table(name = "medical_profile")
 public class MedicalProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,50 +29,50 @@ public class MedicalProfile {
 
     @NotEmpty(message = "the name can't be empty")
     @Column(name = "name",nullable = false)
-    private String Name ;
+    private String name ;
 
     @NotEmpty(message = "the weight can't be empty")
     @Column(name = "weight",nullable = false)
-    private String Weight ;
+    private String weight ;
 
     @NotEmpty(message = "the height can't be empty")
     @Column(name = "height",nullable = false)
-    private String Height ;
+    private String height ;
 
     @NotEmpty(message = "the height can't be empty")
-    @Column(name = "lenght",nullable = false)
-    private String Lenght ;
+    @Column(name = "length",nullable = false)
+    private String length ;
 
     @NotEmpty(message = "the eyes can't be empty")
     @Column(name = "eyes",nullable = false)
-    private String Eyes ;
+    private String eyes ;
 
     @NotEmpty(message = "the breed can't be empty")
     @Column(name = "breed",nullable = false)
-    private String Breed ;
+    private String breed ;
 
     @NotEmpty(message = "the sex can't be empty")
     @Column(name = "gender",nullable = false)
-    private String Gender;
+    private String gender;
 
     @NotEmpty(message = "the color can't be empty")
     @Column(name = "color",nullable = false)
-    private String Color;
+    private String color;
 
     @NotEmpty(message = "the description can't be empty")
     @Column(name = "description",nullable = false)
     @Lob
-    private String Description ;
+    private String description ;
 
     @NotEmpty(message = "The photo can't be empty")
     @Column(name = "photo",unique = true,nullable = false)
-    private String Photo ;
+    private String photo ;
 
     @NotEmpty(message = "the age can't be empty")
     @Column(name = "age",nullable = false)
-    private String Age ;
+    private String age ;
 
-    // private MedicalRecord medicalrecord ;
+    // private MedicalRecord medicalRecord ;
     // private int ServicesMedicalRecordForeignKey ;
 
     //Relationships

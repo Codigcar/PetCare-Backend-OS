@@ -11,25 +11,25 @@ import javax.persistence.Id;
 @Setter
 public class SaveMedicalProfileResource {
 
-    private String Name ;
+    private String name ;
 
-    private String Weight ;
+    private String weight ;
 
-    private String Height ;
+    private String height ;
 
-    private String Lenght ;
+    private String length ;
 
-    private String Eyes ;
+    private String eyes ;
 
-    private String Breed ;
+    private String breed ;
 
-    private String Gender ;
+    private String gender ;
 
-    private String Color;
+    private String color;
 
-    private String Description ;
+    private String description ;
 
-    private String Photo ;
+    private String photo ;
 
-    private String Age ;
+    private String age ;
 }

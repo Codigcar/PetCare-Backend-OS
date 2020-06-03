@@ -7,18 +7,18 @@ import lombok.Setter;
 @Setter
 public class MedicalProfileResource {
 
-    private Long Id ;
-    private String Name ;
-    private String Weight ;
-    private String Height ;
-    private String Lenght ;
-    private String Eyes ;
-    private String Breed ;
-    private String Gender ;
-    private String Color;
-    private String Description ;
-    private String Photo ;
-    private String Age ;
+    private Long id ;
+    private String name ;
+    private String weight ;
+    private String height ;
+    private String length ;
+    private String eyes ;
+    private String breed ;
+    private String gender ;
+    private String color;
+    private String description ;
+    private String photo ;
+    private String age ;
 
 
 }

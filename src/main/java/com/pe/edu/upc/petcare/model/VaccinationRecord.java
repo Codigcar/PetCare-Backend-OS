@@ -26,11 +26,11 @@ public class VaccinationRecord extends AuditModel{
 
     @NotEmpty(message = "the name can't be empty")
     @Column(name = "name",nullable = false)
-    private String Name ;
+    private String name ;
 
     @NotEmpty(message = "the description can't be empty")
     @Column(name = "description",nullable = false)
-    private String Description ;
+    private String description ;
 
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
