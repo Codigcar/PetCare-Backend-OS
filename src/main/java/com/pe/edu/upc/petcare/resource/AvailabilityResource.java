@@ -11,6 +11,6 @@ public class AvailabilityResource {
 
     private Long id;
     private String dateAvailability;
-    private Date startTime;
-    private Date endTime;
+    private String startTime;
+    private String endTime;
 }
