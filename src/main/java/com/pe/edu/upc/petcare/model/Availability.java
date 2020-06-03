@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -24,15 +25,15 @@ public class Availability {
     @Column(name = "date_availability")
     private String dateAvailability;
 
-    @NotEmpty(message = "The availability date can't be empty")
-    @Temporal(TemporalType.TIME)
+    @NotEmpty(message = "The startTime can't be empty")
+    @Size(min = 5, max = 5, message = "the size of the start time is 5")
     @Column(name = "start_time")
-    private Date startTime;
+    private String startTime;
 
-    @NotEmpty(message = "The availability date can't be empty")
-    @Temporal(TemporalType.TIME)
+    @NotEmpty(message = "The endTime can't be empty")
+    @Size(min = 5, max = 5, message = "the size of the end time is 5")
     @Column(name = "end_time")
-    private Date endTime;
+    private String endTime;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "product_id",nullable = false)
