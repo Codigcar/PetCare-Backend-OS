@@ -7,10 +7,13 @@ import lombok.Setter;
 @Setter
 public class PersonProfileResource {
     private Long id;
-    private String firstName;
+    private String name;
+
+    private String password;
     private String lastName;
     private String document;
     private String email;
     private String phone;
     private String age;
+    private int subscriptionPlan;
 }

@@ -27,8 +27,10 @@ public class BusinessProfile extends Profile {
     private Long id;
 
     @NotEmpty(message = "the first name can't be empty")
-    @Column(name = "first_name",nullable = false)
-    private String firstName;
+    @Column(name = "name",nullable = false)
+    private String Name;
+
+    private String password;
 
     @NotEmpty(message = "the last name can't be empty")
     @Column(name = "last_name",nullable = false)
@@ -58,5 +60,11 @@ public class BusinessProfile extends Profile {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Provider provider;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Account account;
 
 }

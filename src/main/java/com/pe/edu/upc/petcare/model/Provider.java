@@ -55,4 +55,6 @@ public class Provider {
     @JsonIgnore
     List<Product> products;
 
+    private int subscriptionPlan;
+
 }

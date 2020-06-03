@@ -2,8 +2,12 @@ package com.pe.edu.upc.petcare.service.impl;
 
 
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
+import com.pe.edu.upc.petcare.model.Account;
 import com.pe.edu.upc.petcare.model.PersonProfile;
+import com.pe.edu.upc.petcare.repository.AccountRepository;
 import com.pe.edu.upc.petcare.repository.PersonProfileRepository;
+import com.pe.edu.upc.petcare.repository.RolRepository;
+import com.pe.edu.upc.petcare.repository.SubscriptionPlanRepository;
 import com.pe.edu.upc.petcare.service.PersonProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +21,15 @@ public class PersonProfileServiceImpl implements PersonProfileService {
     @Autowired
     private PersonProfileRepository personProfileRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private RolRepository rolRepository;
+
+    @Autowired
+    private SubscriptionPlanRepository subscriptionPlanRepository;
+    
     @Override
     public Page<PersonProfile> getAllCustomers(Pageable pageable) {
         return personProfileRepository.findAll(pageable);
@@ -31,6 +44,17 @@ public class PersonProfileServiceImpl implements PersonProfileService {
     @Override
     public PersonProfile createCustomer(PersonProfile personProfile)
     {
+        Account account = new Account();
+        account.setUser(personProfile.getEmail());
+        account.setPassword(personProfile.getPassword());
+
+        account.setRol(rolRepository.findById((long) 1).orElse(null));
+
+        account.setSubscriptionPlan(subscriptionPlanRepository.findById((long) 1).orElse(null));
+
+        accountRepository.save(account);
+
+        personProfile.setAccount(account);
         return personProfileRepository.save(personProfile);
     }
 
@@ -38,7 +62,7 @@ public class PersonProfileServiceImpl implements PersonProfileService {
     public PersonProfile updateCustomer(Long customerId, PersonProfile personProfileRequest) {
         PersonProfile personProfile = personProfileRepository.findById(customerId)
                 .orElseThrow(()->new ResourceNotFoundException("Customer","Id",customerId));
-        personProfile.setFirstName(personProfileRequest.getFirstName());
+        personProfile.setName(personProfileRequest.getName());
         personProfile.setLastName(personProfileRequest.getLastName());
         personProfile.setDocument(personProfileRequest.getDocument());
         personProfile.setEmail(personProfileRequest.getEmail());

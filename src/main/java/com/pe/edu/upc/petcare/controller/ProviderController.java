@@ -50,7 +50,7 @@ public class ProviderController {
                                             @PathVariable(name = "providerId")Long providerId,
                                             @Valid @RequestBody SaveProviderResource resource){
         Provider provider=convertToEntity(resource);
-        return convertToResource(providerService.updateProvider(providerId,provider));
+        return convertToResource(providerService.updateProvider(businessId, providerId,provider));
     }
 
     @DeleteMapping("/{providerId}")
