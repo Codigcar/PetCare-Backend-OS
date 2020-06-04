@@ -4,10 +4,7 @@ import com.pe.edu.upc.petcare.model.Account;
 import com.pe.edu.upc.petcare.model.BusinessProfile;
 import com.pe.edu.upc.petcare.model.PersonProfile;
 import com.pe.edu.upc.petcare.model.Provider;
-import com.pe.edu.upc.petcare.repository.AccountRepository;
-import com.pe.edu.upc.petcare.repository.BusinessProfileRepository;
-import com.pe.edu.upc.petcare.repository.ProviderRepository;
-import com.pe.edu.upc.petcare.repository.RolRepository;
+import com.pe.edu.upc.petcare.repository.*;
 import com.pe.edu.upc.petcare.service.BusinessProfileService;
 import com.pe.edu.upc.petcare.service.PersonProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,9 @@ public class BusinessProfileServiceImpl implements BusinessProfileService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private SubscriptionPlanRepository subscriptionPlanRepository;
 
 
     @Override
@@ -58,7 +58,7 @@ public class BusinessProfileServiceImpl implements BusinessProfileService {
 
         account.setUser(businessProfile.getEmail());
         account.setPassword(businessProfile.getPassword());
-
+        account.setSubscriptionPlan(subscriptionPlanRepository.findById((long) 1).orElse(null));
         account.setRol(rolRepository.findById((long) 2).orElse(null));
 
         accountRepository.save(account);
