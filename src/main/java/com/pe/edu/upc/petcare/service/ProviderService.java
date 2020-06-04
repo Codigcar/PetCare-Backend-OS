@@ -6,8 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface ProviderService {
-    Provider assignProviderProduct(Long providerId,Long productId);
-    Provider deallocateProviderProduct(Long providerId,Long productId);
     Page<Provider> getAllProviders(Pageable pageable);
     Provider getProviderById(Long providerId);
     Provider createProvider(Provider provider);

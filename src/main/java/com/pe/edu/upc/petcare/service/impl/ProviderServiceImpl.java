@@ -27,29 +27,6 @@ public class ProviderServiceImpl implements ProviderService {
     private BusinessProfileRepository businessProfileRepository;
 
     @Override
-    public Provider assignProviderProduct(Long providerId, Long productId) {
-        Product product=productRepository.findById(productId)
-                .orElseThrow(()->new ResourceNotFoundException("Product","Id",productId));
-        return providerRepository.findById(productId).map(provider -> {
-            if(!provider.getProducts().contains(product)){
-                provider.getProducts().add(product);
-                return providerRepository.save(provider);
-            }
-            return provider;
-        }).orElseThrow(()->new ResourceNotFoundException("Provider","Id",providerId));
-    }
-
-    @Override
-    public Provider deallocateProviderProduct(Long providerId, Long productId) {
-        Product product=productRepository.findById(productId)
-                .orElseThrow(()->new ResourceNotFoundException("Product","Id",productId));
-        return providerRepository.findById(providerId).map(provider -> {
-            provider.getProducts().remove(product);
-            return providerRepository.save(provider);
-        }).orElseThrow(()->new ResourceNotFoundException("Provider","Id",providerId));
-    }
-
-    @Override
     public Page<Provider> getAllProviders(Pageable pageable) {
         return providerRepository.findAll(pageable);
     }

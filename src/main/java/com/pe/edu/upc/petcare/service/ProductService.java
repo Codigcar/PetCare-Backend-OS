@@ -7,8 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface ProductService {
     Page<Product> getAllProducts (Pageable pageable);
-    Page<Product> getAllProductsByProviderId(Long providerId,Pageable pageable);
-    Product createProduct(Product product);
+     Product createProduct(Product product);
     Product updateProduct(Long productId,Product productDetails);
     ResponseEntity<?> deleteProduct(Long productId);
 }

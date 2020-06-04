@@ -27,15 +27,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> getAllProductsByProviderId(Long providerId, Pageable pageable) {
-        return providerRepository.findById(providerId).map(provider -> {
-            List<Product> products=provider.getProducts();
-            int productCount=products.size();
-            return new PageImpl<>(products,pageable,productCount);
-        }).orElseThrow(()->new ResourceNotFoundException("Provider","Id",providerId));
-    }
-
-    @Override
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
