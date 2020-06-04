@@ -18,5 +18,4 @@ public class SavePersonProfileResource {
     private String email;
     private String phone;
     private String age;
-    private int subscriptionPlan;
 }

@@ -13,7 +13,10 @@ import javax.validation.constraints.Size;
 @Setter
 public class SaveBusinessProfileResource {
 
-    private String firstName;
+    private String name;
+
+    private String password;
+
 
     private String lastName;
 
@@ -21,11 +24,11 @@ public class SaveBusinessProfileResource {
 
     private String email;
 
-     private String phone;
 
-   private String age;
+    private String phone;
+
+
+    private String age;
 
     private boolean owner;
-
-    private Provider provider;
 }
