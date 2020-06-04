@@ -34,14 +34,6 @@ public class ProductController {
         return new PageImpl<>(products,pageable,productsCount);
     }
 
-    @GetMapping("/providers/{providerId}/products")
-    public Page<ProductResource> getAllProductsByProviderId(@PathVariable(name = "providerId")Long providerId,
-                                                            Pageable pageable){
-        List<ProductResource> products=productService.getAllProductsByProviderId(providerId,pageable).getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        int productCount=products.size();
-        return new PageImpl<>(products,pageable,productCount);
-    }
-
     @PostMapping("/products")
     public ProductResource createProduct (@Valid @RequestBody SaveProductResource resource){
         return convertToResource(productService.createProduct(convertToEntity(resource)));

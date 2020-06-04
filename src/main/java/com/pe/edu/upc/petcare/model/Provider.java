@@ -47,14 +47,6 @@ public class Provider {
     @Column(name = "description",nullable = false)
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name = "providers_products",
-            joinColumns = {@JoinColumn(name = "provider_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")})
-    @JsonIgnore
-    List<Product> products;
-
     private int subscriptionPlan;
 
 }

@@ -21,11 +21,4 @@ public class Product {
     private String name;
     private double price;
 
-    //RelationShip
-    @ManyToMany(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST,CascadeType.MERGE},
-    mappedBy = "products")
-    @JsonIgnore
-    private List<Provider> providers;
-    
 }

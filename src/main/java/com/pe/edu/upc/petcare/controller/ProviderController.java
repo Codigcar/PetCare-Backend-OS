@@ -58,18 +58,6 @@ public class ProviderController {
         return providerService.deleteProvider(providerId);
     }
 
-    @PostMapping("/{providerId}/products/{productId}")
-    public ProviderResource assignProviderProduct(@PathVariable(name = "providerId")Long providerId,
-                                                 @PathVariable(name = "productId")Long productId){
-        return convertToResource(providerService.assignProviderProduct(providerId,productId));
-    }
-
-    @DeleteMapping("/{providerId}/products/{productId}")
-    public ProviderResource deallocateProviderProduct(@PathVariable(name = "providerId")Long providerId,
-                                                      @PathVariable(name = "productId")Long productId){
-        return convertToResource(providerService.deallocateProviderProduct(providerId,productId));
-    }
-
     private Provider convertToEntity(SaveProviderResource resource) {
 
         return mapper.map(resource, Provider.class);
