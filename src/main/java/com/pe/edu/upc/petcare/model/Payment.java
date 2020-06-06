@@ -18,19 +18,15 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "the card number can't be empty")
-    @Size(min = 16, max = 16, message = "the size of the card number is sixteen")
-    @Column(name = "card_number",unique = true,length = 16,nullable = false)
-    private String cardNumber;
+    @javax.validation.constraints.NotNull(message = "the card number can't be empty")
+    private Long cardNumber;
 
 
     @Column(name = "card_name",nullable = false)
     private String cardName;
 
-    @NotEmpty(message = "the cvv number can't be empty")
-    @Size(min = 3, max = 3, message = "the size of the cvv number is three")
-    @Column(name = "cvv_number",unique = true,length = 3,nullable = false)
-    private String cvvNumber;
+    @javax.validation.constraints.NotNull(message = "the cvv number can't be empty")
+    private Integer cvvNumber;
 
     @NotEmpty(message = "the expiration day can't be empty")
     @Column(name = "expiry_date",unique = true,nullable = false)

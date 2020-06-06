@@ -18,7 +18,7 @@ public class MedicalProfileResource {
     private String color;
     private String description ;
     private String photo ;
-    private String age ;
+    private Integer age ;
 
 
 }

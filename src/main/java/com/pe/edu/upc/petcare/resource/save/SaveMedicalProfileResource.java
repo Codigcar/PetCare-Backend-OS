@@ -31,5 +31,5 @@ public class SaveMedicalProfileResource {
 
     private String photo ;
 
-    private String age ;
+    private Integer age ;
 }

@@ -10,6 +10,5 @@ public class VaccinationRecordResource {
     private Long Id ;
     private String name ;
     private String description ;
-    private String create_at ;
 
 }

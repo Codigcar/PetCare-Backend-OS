@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class BusinessProfileResource {
     private Long id;
-    private String firstName;
+    private String name;
     private String lastName;
-    private String document;
+    private Long document;
     private String email;
-    private String phone;
-    private String age;
+    private Long phone;
+    private Integer age;
 }

@@ -8,6 +8,6 @@ import com.pe.edu.upc.petcare.model.Provider;
 import java.util.List;
 
 public interface AffiliationService {
-    Affiliation create (Long personId,Long affiliation);
+    Affiliation create (Long personId,Long providerId, Affiliation affiliation);
     List<PersonProfile> getAllPersonByProviderId(Provider provider);
 }

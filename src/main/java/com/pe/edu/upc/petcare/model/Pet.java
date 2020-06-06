@@ -28,8 +28,8 @@ public class Pet {
     @Column(name = "name",nullable = false)
     private String name;
 
-    @NotEmpty(message = "the age can't be empty")
-    private String age;
+    @javax.validation.constraints.NotNull(message = "the age can't be empty")
+    private Integer age;
 
     @NotEmpty(message = "the breed can't be empty")
     @Column(name = "breed",nullable = false)

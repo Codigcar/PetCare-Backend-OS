@@ -1,10 +1,7 @@
 package com.pe.edu.upc.petcare.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -14,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @NoArgsConstructor
@@ -36,22 +34,19 @@ public class BusinessProfile extends Profile {
     @Column(name = "last_name",nullable = false)
     private String lastName;
 
-    @NotEmpty(message = "the document identity document can't be empty")
-    @Size(min = 8, max = 8, message = "the size of the identity document is 8")
-    @Column(name = "document",unique = true,length = 8,nullable = false)
-    private String document;
+    @javax.validation.constraints.NotNull(message = "the document can't be empty")
+    private Long document;
 
     @NotEmpty(message = "the email can't be empty")
     @Email(message = "it is not a valid email address")
     @Column(unique = true,nullable = false)
     private String email;
 
-    @NotEmpty(message = "the phone number can't be empty")
-    @Size(min = 9, max = 9, message = "the phone number size is 9")
-    private String phone;
+    @javax.validation.constraints.NotNull(message = "the phone can't be empty")
+    private Long phone;
 
-    @NotEmpty(message = "the age can't be empty")
-    private String age;
+    @javax.validation.constraints.NotNull(message = "the age can't be empty")
+    private Integer age;
 
     private boolean owner;
 

@@ -37,22 +37,19 @@ public class PersonProfile extends Profile {
     @Column(name = "last_name",nullable = false)
     private String lastName;
 
-    @NotEmpty(message = "the document identity document can't be empty")
-    @Size(min = 8, max = 8, message = "the size of the identity document is 8")
-    @Column(name = "document",unique = true,length = 8,nullable = false)
-    private String document;
+    @javax.validation.constraints.NotNull(message = "the document can't be empty")
+    private Long document;
 
     @NotEmpty(message = "the email can't be empty")
     @Email(message = "it is not a valid email address")
     @Column(unique = true,nullable = false)
     private String email;
 
-    @NotEmpty(message = "the age can't be empty")
-    private String age;
+    @javax.validation.constraints.NotNull(message = "the age can't be empty")
+    private Integer age;
 
-    @NotEmpty(message = "the phone number can't be empty")
-    @Size(min = 9, max = 9, message = "the phone number size is 9")
-    private String phone;
+    @javax.validation.constraints.NotNull(message = "phone can't be empty")
+    private Long phone;
 
 
 

@@ -10,6 +10,5 @@ public class SaveVaccinationRecordResource {
 
     private String name ;
     private String description ;
-    private String create_at ;
 
 }

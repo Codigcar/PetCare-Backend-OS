@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class SavePetResource {
 
     private String name;
-    private String age;
+    private Integer age;
     private String breed;
     private String photo;
     private String gender;

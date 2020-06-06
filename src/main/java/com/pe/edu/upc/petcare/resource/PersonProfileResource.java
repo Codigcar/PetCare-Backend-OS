@@ -11,8 +11,8 @@ public class PersonProfileResource {
 
     private String password;
     private String lastName;
-    private String document;
+    private Long document;
     private String email;
-    private String phone;
-    private String age;
+    private Long phone;
+    private Integer age;
 }

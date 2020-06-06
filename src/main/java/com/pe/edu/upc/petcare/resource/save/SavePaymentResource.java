@@ -8,8 +8,8 @@ import lombok.Setter;
 
 public class SavePaymentResource {
 
-    private String cardNumber;
+    private Long cardNumber;
     private String cardName;
-    private String cvvNumber;
+    private Integer cvvNumber;
     private String expiryDate;
 }

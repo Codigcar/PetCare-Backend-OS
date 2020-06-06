@@ -68,9 +68,8 @@ public class MedicalProfile {
     @Column(name = "photo",unique = true,nullable = false)
     private String photo ;
 
-    @NotEmpty(message = "the age can't be empty")
-    @Column(name = "age",nullable = false)
-    private String age ;
+    @javax.validation.constraints.NotNull(message = "the age can't be empty")
+    private Integer age ;
 
     // private MedicalRecord medicalRecord ;
     // private int ServicesMedicalRecordForeignKey ;

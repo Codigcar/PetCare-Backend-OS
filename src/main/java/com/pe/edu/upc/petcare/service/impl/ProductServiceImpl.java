@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> getAllByProviderJoinTypeProductId(Long providerJoinTypeProductId, Pageable pageable) {
-        return productRepository.findAllByProviderJoinTypeProductId(providerJoinTypeProductId,pageable);
+        return productRepository.findAllByProviderJoinProductTypeId(providerJoinTypeProductId,pageable);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseEntity<?> deleteProduct(Long providerJoinTypeProductId,Long productId) {
-        return productRepository.findByIdAndProviderJoinTypeProductId(providerJoinTypeProductId,productId).map(product -> {
+        return productRepository.findByIdAndProviderJoinProductTypeId(providerJoinTypeProductId,productId).map(product -> {
             productRepository.delete(product);
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException(

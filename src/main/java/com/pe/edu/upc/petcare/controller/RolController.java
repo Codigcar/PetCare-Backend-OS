@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin/roles")
 public class RolController {
 
 
@@ -28,7 +28,7 @@ public class RolController {
     @Autowired
     private RolService rolService;
 
-    @PostMapping("/roles")
+    @PostMapping
     public RolResource createRol(@Valid @RequestBody SaveRolResource resource){
         return convertToResource(rolService.createRol(convertToEntity(resource)));
     }

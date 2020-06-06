@@ -31,10 +31,10 @@ public class AffiliationServiceImpl implements AffiliationService {
 
 
     @Override
-    public Affiliation create(Long personId,Long affiliationId) {
+    public Affiliation create(Long personId,Long providerId,Affiliation affiliationId) {
         Affiliation affiliation = new Affiliation();
         affiliation.setPerson(personProfileRepository.findById(personId).orElse(null));
-        affiliation.setProvider(providerRepository.findById(affiliationId).orElse(null));
+        affiliation.setProvider(providerRepository.findById(providerId).orElse(null));
         return affiliationRepository.save(affiliation);
     }
 

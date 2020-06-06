@@ -20,15 +20,15 @@ public class SaveBusinessProfileResource {
 
     private String lastName;
 
-    private String document;
+    private Long document;
 
     private String email;
 
 
-    private String phone;
+    private Long phone;
 
 
-    private String age;
+    private Integer age;
 
     private boolean owner;
 }
