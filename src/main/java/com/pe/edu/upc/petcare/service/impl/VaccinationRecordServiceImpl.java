@@ -48,6 +48,7 @@ public class VaccinationRecordServiceImpl implements VaccinationRecordService {
             throw new ResourceNotFoundException("Profile","Id",profileId);
 
         return vaccinationRecordRepository.findById(vaccinationRecordId).map(vaccinationRecord -> {
+
             vaccinationRecord.setName(vaccinationRecordRequest.getName());
             vaccinationRecord.setDescription(vaccinationRecord.getDescription());
 
