@@ -1,7 +1,7 @@
 package com.pe.edu.upc.petcare.service.impl;
 
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
-import com.pe.edu.upc.petcare.model.TypeProduct;
+import com.pe.edu.upc.petcare.model.ProductType;
 import com.pe.edu.upc.petcare.repository.TypeProductRepository;
 import com.pe.edu.upc.petcare.service.TypeProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,35 +16,35 @@ public class TypeProductServiceImpl implements TypeProductService {
     TypeProductRepository typeProductRepository;
 
     @Override
-    public Page<TypeProduct> getAllServiceType(Pageable pageable) {
+    public Page<ProductType> getAllServiceType(Pageable pageable) {
         return typeProductRepository.findAll(pageable);
     }
 
     @Override
-    public TypeProduct getServiceTypeById(Long serviceTypeId) {
+    public ProductType getServiceTypeById(Long serviceTypeId) {
         return typeProductRepository.findById(serviceTypeId)
                 .orElseThrow(()->new ResourceNotFoundException("ServiceType","Id",serviceTypeId));
     }
 
     @Override
-    public TypeProduct createServiceType(TypeProduct typeProduct) {
-        return typeProductRepository.save(typeProduct);
+    public ProductType createServiceType(ProductType productType) {
+        return typeProductRepository.save(productType);
     }
 
     @Override
-    public TypeProduct updateServiceType(Long serviceTypeId, TypeProduct typeProductRequest) {
-        TypeProduct typeProduct = typeProductRepository.findById(serviceTypeId)
+    public ProductType updateServiceType(Long serviceTypeId, ProductType productTypeRequest) {
+        ProductType productType = typeProductRepository.findById(serviceTypeId)
                 .orElseThrow(()->new ResourceNotFoundException("ServiceType","Id",serviceTypeId));
-        typeProduct.setName(typeProductRequest.getName());
+        productType.setName(productTypeRequest.getName());
 
-        return typeProductRepository.save(typeProduct);
+        return typeProductRepository.save(productType);
     }
 
     @Override
     public ResponseEntity<?> deleteServiceType(Long serviceTypeId) {
-        TypeProduct typeProduct = typeProductRepository.findById(serviceTypeId)
+        ProductType productType = typeProductRepository.findById(serviceTypeId)
                 .orElseThrow(()->new ResourceNotFoundException("ServiceType","Id",serviceTypeId));
-        typeProductRepository.delete(typeProduct);
+        typeProductRepository.delete(productType);
 
         return ResponseEntity.ok().build();
     }

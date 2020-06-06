@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class PaymentController {
+public class ProviderPaymentsController {
     @Autowired
     private ModelMapper mapper;
 

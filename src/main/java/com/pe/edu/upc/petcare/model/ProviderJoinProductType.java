@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "provider_join_typeProduct")
 @Data
-public class ProviderJoinTypeProduct {
+public class ProviderJoinProductType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,5 +25,5 @@ public class ProviderJoinTypeProduct {
     @JoinColumn(name = "typeProduct_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private TypeProduct typeProduct;
+    private ProductType productType;
 }

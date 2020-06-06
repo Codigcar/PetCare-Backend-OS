@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SaveTypeProductResource {
+public class SaveProductTypeResource {
     private String name;
 }
