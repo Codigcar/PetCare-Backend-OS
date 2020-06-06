@@ -3,23 +3,19 @@ package com.pe.edu.upc.petcare.service.impl;
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
 import com.pe.edu.upc.petcare.model.Product;
 import com.pe.edu.upc.petcare.repository.ProductRepository;
-import com.pe.edu.upc.petcare.repository.ProviderJoinTypeProductRepository;
-import com.pe.edu.upc.petcare.repository.ProviderRepository;
-import com.pe.edu.upc.petcare.resource.ProviderJoinProductResource;
+import com.pe.edu.upc.petcare.repository.ProviderJoinProductTypeRepository;
 import com.pe.edu.upc.petcare.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProviderJoinTypeProductRepository providerJoinTypeProductRepository;
+    private ProviderJoinProductTypeRepository providerJoinProductTypeRepository;
     @Autowired
     private ProductRepository productRepository;
 
@@ -30,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Long providerJoinTypeProductId,Product product) {
-        return providerJoinTypeProductRepository.findById(providerJoinTypeProductId).map(providerJoinTypeProduct -> {
-            product.setProviderJoinTypeProduct(providerJoinTypeProduct);
+        return providerJoinProductTypeRepository.findById(providerJoinTypeProductId).map(providerJoinTypeProduct -> {
+            product.setProviderJoinProductType(providerJoinTypeProduct);
             return productRepository.save(product);
         }).orElseThrow(()->new ResourceNotFoundException(
                 "Provider Join TypeProduct" + "Id" + providerJoinTypeProductId));
@@ -39,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Long providerJoinTypeProductId,Long productId, Product productDetails) {
-        if(!providerJoinTypeProductRepository.existsById(providerJoinTypeProductId))
+        if(!providerJoinProductTypeRepository.existsById(providerJoinTypeProductId))
             throw new ResourceNotFoundException("ProviderJoinProduct","Id",providerJoinTypeProductId);
 
         return productRepository.findById(productId).map(product -> {

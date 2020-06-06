@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/business")
-public class BusinessController {
+public class BusinessAccountsController {
 
     @Autowired
     private ModelMapper mapper;

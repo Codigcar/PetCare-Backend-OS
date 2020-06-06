@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/business/{businessId}/providers/{providerId}/people/{personId}/pets/{petId}/petprofiles")
-public class MedicalProfileController {
+@RequestMapping("/api/business/{businessId}/providers/{providerId}/people/{personId}/pets/{petId}/pet-profiles")
+public class ProviderMedicalRecordController {
 
     @Autowired
     private ModelMapper mapper;

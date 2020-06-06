@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/business/{businessId}/providers/{providerId}/people/{personId}/pets/{petId}/petprofiles/{petprofileId}/vaccinations")
 
-public class VaccinationRecordController {
+public class ProviderVaccinationRecordController {
 
     @Autowired
     private ModelMapper mapper;

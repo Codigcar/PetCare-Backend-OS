@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/business/{businessId}/providers/{providerId}/product-types/{productTypeId}/")
-public class ProductController {
+public class ProviderProductsController {
     @Autowired
     private ModelMapper mapper;
     @Autowired

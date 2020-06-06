@@ -6,7 +6,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -24,6 +23,6 @@ public class Product {
     @JoinColumn(name = "type_product_provider_Id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private ProviderJoinTypeProduct providerJoinTypeProduct;
+    private ProviderJoinProductType providerJoinProductType;
 
 }
