@@ -16,9 +16,14 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_type")
-    private String productType;
     private String name;
-    private double price;
+
+
+    //RelationShips
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "type_product_provider_Id",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private ProviderJoinTypeProduct providerJoinTypeProduct;
 
 }

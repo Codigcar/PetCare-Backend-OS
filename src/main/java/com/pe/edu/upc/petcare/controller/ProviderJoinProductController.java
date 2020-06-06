@@ -22,7 +22,7 @@ public class ProviderJoinProductController {
     @Autowired
     private ProviderJoinProductService providerJoinProductService;
 
-    @PostMapping("/provider/{providerId}/products/{productId}/providersJoinProducts")
+    @PostMapping("/provider/{providerId}/products/{productId}/provider-join-products")
     public ProviderJoinProductResource createRelationship(@PathVariable(name = "providerId")Long providerId,
                                                           @PathVariable(name = "productId")Long productId,
                                                           @Valid @RequestBody SaveProviderJoinProductResource resource){

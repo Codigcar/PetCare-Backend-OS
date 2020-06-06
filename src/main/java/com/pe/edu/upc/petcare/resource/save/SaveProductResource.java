@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SaveProductResource {
-    private String productType;
+
     private String name;
-    private double price;
+
 }
