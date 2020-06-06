@@ -1,6 +1,7 @@
 package com.pe.edu.upc.petcare;
 
 import com.pe.edu.upc.petcare.model.Rol;
+import com.pe.edu.upc.petcare.model.SubscriptionPlan;
 import cucumber.api.java.en.Then;
 import io.cucumber.java.en.Given;
 import lombok.extern.log4j.Log4j2;
@@ -39,6 +40,18 @@ public class StepDefinitions {
         assertEquals(rol.getName(),"customer");
     }
 
+    @Given("^I sending SubscriptionPlan to be created with subscriptionPlan_id (.*),name (.*), description (.*),duration (.*), price (.*)$")
+    public void i_sending_SubscriptionPlan_to_be_created_with_subscriptionPlan_id_name_Basico_description_plan_Basico_duration_price(String id,String name, String description, String duration, String price) {
+        String url = postUrl + ":" + port + "/api/admin/subscription-plan";
+        SubscriptionPlan newSubscription = new SubscriptionPlan();
+        newSubscription.setId((long) Integer.parseInt(id));
+        newSubscription.setName(name);
+        newSubscription.setDuration(Integer.parseInt(duration) );
+        newSubscription.setPrice(Double.parseDouble(price));
+        SubscriptionPlan subscriptionPlan = restTemplate.postForObject(url, newSubscription, SubscriptionPlan.class);
+        log.info(subscriptionPlan);
+        assertEquals(subscriptionPlan.getName(),"Basico");
+    }
 
 
 
