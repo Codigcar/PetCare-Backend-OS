@@ -8,6 +8,6 @@ import lombok.Setter;
 public class SaveRolResource {
 
     //
-    private Long id;
+    //private Long id;
     private String name;
 }

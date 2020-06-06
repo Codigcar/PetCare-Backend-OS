@@ -1,7 +1,7 @@
 package com.pe.edu.upc.petcare.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javafx.scene.NodeBuilder;
+
 import lombok.*;
 
 import javax.persistence.*;
