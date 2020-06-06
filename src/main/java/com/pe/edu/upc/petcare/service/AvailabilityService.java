@@ -10,4 +10,5 @@ public interface AvailabilityService {
         Page<Availability> getAllAvailabilitiesByProductId(Long productId, Pageable pageable);
         Availability createAvailability (Long productId,Availability availability);
         Availability updateAvailability (Long productId, Long availabilityId,Availability availabilityDetails);
+        ResponseEntity<?> deleteAvailability(Long productId,Long availabilityId);
 }

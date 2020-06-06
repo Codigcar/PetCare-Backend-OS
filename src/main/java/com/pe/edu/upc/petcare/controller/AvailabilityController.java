@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/business/{businessId}/providers/{providerId}/provider-join-products/{providerJoinProductId}")
 public class AvailabilityController {
     @Autowired
     private ModelMapper mapper;
@@ -40,7 +40,7 @@ public class AvailabilityController {
         return convertToResource(availabilityService.createAvailability(productId,convertToEntity(resource)));
     }
 
-    @PutMapping("/products/{productId}/availabilities{availabilityId}/")
+    @PutMapping("/products/{productId}/availabilities{availabilityId}")
     public AvailabilityResource updateAvailability(@PathVariable(name = "productId")Long productId,
                                  @PathVariable(name = "availabilityId")Long availabilityId,
                                  @Valid @RequestBody SaveAvailabilityResource resource){

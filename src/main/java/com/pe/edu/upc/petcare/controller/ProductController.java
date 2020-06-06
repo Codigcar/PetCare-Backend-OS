@@ -22,7 +22,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/business/{businessId}/providers/{providerId}/product-types/{productTypeId}/")
 public class ProductController {
     @Autowired
     private ModelMapper mapper;

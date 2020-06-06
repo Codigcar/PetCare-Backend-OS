@@ -35,10 +35,9 @@ public class Availability {
     @Column(name = "end_time")
     private String endTime;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "product_id",nullable = false)
-    @OnDelete(action= OnDeleteAction.CASCADE)
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="product_id")
     @JsonIgnore
-    private Product product;
+    private Product product ;
 
 }
