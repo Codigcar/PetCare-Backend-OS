@@ -7,7 +7,5 @@ import lombok.Setter;
 @Setter
 public class ProductResource {
     private Long id;
-    private String productType;
     private String name;
-    private double price;
 }

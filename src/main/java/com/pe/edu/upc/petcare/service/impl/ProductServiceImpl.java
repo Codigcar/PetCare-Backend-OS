@@ -3,7 +3,9 @@ package com.pe.edu.upc.petcare.service.impl;
 import com.pe.edu.upc.petcare.exception.ResourceNotFoundException;
 import com.pe.edu.upc.petcare.model.Product;
 import com.pe.edu.upc.petcare.repository.ProductRepository;
+import com.pe.edu.upc.petcare.repository.ProviderJoinTypeProductRepository;
 import com.pe.edu.upc.petcare.repository.ProviderRepository;
+import com.pe.edu.upc.petcare.resource.ProviderJoinProductResource;
 import com.pe.edu.upc.petcare.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,35 +19,42 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProviderJoinTypeProductRepository providerJoinTypeProductRepository;
     @Autowired
-    private ProviderRepository providerRepository;
+    private ProductRepository productRepository;
 
     @Override
-    public Page<Product> getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Page<Product> getAllByProviderJoinTypeProductId(Long providerJoinTypeProductId, Pageable pageable) {
+        return productRepository.findAllByProviderJoinTypeProductId(providerJoinTypeProductId,pageable);
     }
 
     @Override
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
+    public Product createProduct(Long providerJoinTypeProductId,Product product) {
+        return providerJoinTypeProductRepository.findById(providerJoinTypeProductId).map(providerJoinTypeProduct -> {
+            product.setProviderJoinTypeProduct(providerJoinTypeProduct);
+            return productRepository.save(product);
+        }).orElseThrow(()->new ResourceNotFoundException(
+                "Provider Join TypeProduct" + "Id" + providerJoinTypeProductId));
     }
 
     @Override
-    public Product updateProduct(Long productId, Product productDetails) {
+    public Product updateProduct(Long providerJoinTypeProductId,Long productId, Product productDetails) {
+        if(!providerJoinTypeProductRepository.existsById(providerJoinTypeProductId))
+            throw new ResourceNotFoundException("ProviderJoinProduct","Id",providerJoinTypeProductId);
+
         return productRepository.findById(productId).map(product -> {
-                product.setProductType(productDetails.getProductType());
-                product.setName(productDetails.getName());
-                product.setPrice(productDetails.getPrice());
-                return productRepository.save(product);
+            product.setName(productDetails.getName());
+
+            return productRepository.save(product);
         }).orElseThrow(()->new ResourceNotFoundException("Product","Id",productId));
     }
 
     @Override
-    public ResponseEntity<?> deleteProduct(Long productId) {
-        return productRepository.findById(productId).map(product -> {
+    public ResponseEntity<?> deleteProduct(Long providerJoinTypeProductId,Long productId) {
+        return productRepository.findByIdAndProviderJoinTypeProductId(providerJoinTypeProductId,productId).map(product -> {
             productRepository.delete(product);
             return ResponseEntity.ok().build();
-        }).orElseThrow(()->new ResourceNotFoundException("Product","Id",productId));
+        }).orElseThrow(()->new ResourceNotFoundException(
+                "Product not found with Id"+productId+"and ProviderJoinProductId"+providerJoinTypeProductId));
     }
 }
