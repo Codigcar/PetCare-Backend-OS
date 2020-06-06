@@ -8,6 +8,7 @@ import com.pe.edu.upc.petcare.service.AvailabilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,5 +44,14 @@ public class AvailabilityServiceImpl implements AvailabilityService {
             availability.setEndTime(availabilityDetails.getEndTime());
             return availabilityRepository.save(availability);
         }).orElseThrow(()->new ResourceNotFoundException("Availability","Id",availabilityId));
+    }
+
+    @Override
+    public ResponseEntity<?> deleteAvailability(Long productId, Long availabilityId) {
+        return availabilityRepository.findByIdAndProductId(availabilityId,productId).map(availability -> {
+            availabilityRepository.delete(availability);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(()->new ResourceNotFoundException(
+                "Availability not found with Id"+availabilityId+"and ProductId"+productId));
     }
 }
