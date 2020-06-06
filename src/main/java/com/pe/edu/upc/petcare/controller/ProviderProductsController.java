@@ -22,7 +22,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/business/{businessId}/providers/{providerId}/product-types/{productTypeId}/provider-join-products/{providerJoinProductId}/products")
+@RequestMapping("/api/business/{businessId}/providers/{providerId}/product-types/{productTypeId}/products")
 public class ProviderProductsController {
     @Autowired
     private ModelMapper mapper;
@@ -38,9 +38,9 @@ public class ProviderProductsController {
     }
 
     @PostMapping
-    public ProductResource createProduct (@PathVariable(name = "providerJoinProductId") Long providerJoinProductId,
+    public ProductResource createProduct (@PathVariable(name = "productTypeId") Long productTypeId,
                                           @Valid @RequestBody SaveProductResource resource){
-        return convertToResource(productService.createProduct(providerJoinProductId,convertToEntity(resource)));
+        return convertToResource(productService.createProduct(productTypeId,convertToEntity(resource)));
     }
 
     @PutMapping("/{productId}")
