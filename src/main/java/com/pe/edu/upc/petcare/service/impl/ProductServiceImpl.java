@@ -20,23 +20,23 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Page<Product> getAllByProviderJoinTypeProductId(Long providerJoinTypeProductId, Pageable pageable) {
-        return productRepository.findAllByProviderJoinProductTypeId(providerJoinTypeProductId,pageable);
+    public Page<Product> getAllByProviderJoinTypeProductId(Long productTypeId, Pageable pageable) {
+        return productRepository.findAllByProviderJoinProductTypeId(productTypeId,pageable);
     }
 
     @Override
-    public Product createProduct(Long providerJoinTypeProductId,Product product) {
-        return providerJoinProductTypeRepository.findById(providerJoinTypeProductId).map(providerJoinTypeProduct -> {
+    public Product createProduct(Long productTypeId,Product product) {
+        return providerJoinProductTypeRepository.findById(productTypeId).map(providerJoinTypeProduct -> {
             product.setProviderJoinProductType(providerJoinTypeProduct);
             return productRepository.save(product);
         }).orElseThrow(()->new ResourceNotFoundException(
-                "Provider Join TypeProduct" + "Id" + providerJoinTypeProductId));
+                "Product Type" + "Id" + productTypeId));
     }
 
     @Override
-    public Product updateProduct(Long providerJoinTypeProductId,Long productId, Product productDetails) {
-        if(!providerJoinProductTypeRepository.existsById(providerJoinTypeProductId))
-            throw new ResourceNotFoundException("ProviderJoinProduct","Id",providerJoinTypeProductId);
+    public Product updateProduct(Long productTypeId,Long productId, Product productDetails) {
+        if(!providerJoinProductTypeRepository.existsById(productTypeId))
+            throw new ResourceNotFoundException("ProviderJoinProduct","Id",productTypeId);
 
         return productRepository.findById(productId).map(product -> {
             product.setName(productDetails.getName());
@@ -46,11 +46,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<?> deleteProduct(Long providerJoinTypeProductId,Long productId) {
-        return productRepository.findByIdAndProviderJoinProductTypeId(providerJoinTypeProductId,productId).map(product -> {
+    public ResponseEntity<?> deleteProduct(Long productTypeId,Long productId) {
+        return productRepository.findByIdAndProviderJoinProductTypeId(productTypeId,productId).map(product -> {
             productRepository.delete(product);
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException(
-                "Product not found with Id"+productId+"and ProviderJoinProductId"+providerJoinTypeProductId));
+                "Product not found with Id"+productId+"and ProviderJoinProductId"+productTypeId));
     }
 }
