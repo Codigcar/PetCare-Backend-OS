@@ -44,7 +44,7 @@ public class ProviderVaccinationRecordController {
         List<VaccinationRecordResource> resources=vaccinationRecordPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources,pageable,resources.size());
   }
-    @GetMapping("{vaccinationId}")
+    @GetMapping("/{vaccinationId}")
     public VaccinationRecordResource getVaccinationRecordByIdAndMedicalProfileId(@PathVariable(name = "vaccinationId")Long vaccinationId,@PathVariable(name = "petprofileId")Long profileId,@PathVariable(name = "petId")Long petId,@PathVariable(name = "personId")Long personId,
                                                @Valid @RequestBody SaveVaccinationRecordResource resource){
         personProfileService.getPersonById(personId);
@@ -67,7 +67,7 @@ public class ProviderVaccinationRecordController {
         return convertToResource(vaccinationRecordService.createVaccinationRecord(profileId,convertToEntity(resource)));
     }
 
-    @PutMapping("{vaccinationId}")
+    @PutMapping("/{vaccinationId}")
     public VaccinationRecordResource updateVaccinationRecord(@PathVariable(name = "petprofileId")Long profileId,@PathVariable(name = "petId")Long petId,@PathVariable(name = "personId")Long customerId,@PathVariable(name = "vaccinationId")Long vaccinationId,
                                                              @Valid @RequestBody SaveVaccinationRecordResource resource){
 
@@ -78,7 +78,7 @@ public class ProviderVaccinationRecordController {
     }
 
 
-    @DeleteMapping("{vaccinationId}")
+    @DeleteMapping("/{vaccinationId}")
     public ResponseEntity<?> deleteProfile(@PathVariable(name = "petId")Long petId,@PathVariable(name = "personId")Long customerId,
                                        @PathVariable(name = "petprofileId")Long profileId,@PathVariable(name = "vaccinationId")Long vaccinationId){
 

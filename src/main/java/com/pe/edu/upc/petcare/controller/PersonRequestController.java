@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/people/{peopleId}/pets/{petId}/providers/{providerId}/products/{servicesId}/requests")
+@RequestMapping("/api/people/{personId}/pets/{petId}/providers/{providerId}/products/{productId}/requests")
 public class PersonRequestController {
 
     @Autowired
@@ -23,12 +23,12 @@ public class PersonRequestController {
     private PersonRequestService personRequestService;
 
     @PostMapping
-    public PersonRequestResource create(@PathVariable("peopleId") Long peopleId,
+    public PersonRequestResource create(@PathVariable("personId") Long personId,
                                         @PathVariable("petId") Long petId,
                                         @PathVariable("providerId") Long providerId,
-                                        @PathVariable("servicesId") Long servicesId,
+                                        @PathVariable("productId") Long productId,
                                         @RequestBody SavePersonRequestResource resource){
-        return convertToResource(personRequestService.create(peopleId,petId,providerId,servicesId,convertToEntity(resource)));
+        return convertToResource(personRequestService.create(personId,petId,providerId,productId,convertToEntity(resource)));
     }
 
     private PersonRequest convertToEntity(SavePersonRequestResource resource) {

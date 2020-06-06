@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/people/{peopleId}/pets")
 public class PersonPetsController {
     @Autowired
     private ModelMapper mapper;
@@ -26,7 +26,7 @@ public class PersonPetsController {
     @Autowired
     private PetService petService;
 
-    @GetMapping("/people/{peopleId}/pets")
+    @GetMapping
     public Page<PetResource> getAllPetsByCustomerId(@PathVariable(name = "peopleId")Long peopleId,
                                                     Pageable pageable){
         Page<Pet> petPage=petService.getAllPetsByPersonProfileId(peopleId,pageable);
@@ -34,27 +34,27 @@ public class PersonPetsController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @GetMapping("/people/{peopleId}/pets/{petId}")
+    @GetMapping("/{petId}")
     public PetResource getPetByIdAndCustomerId(@PathVariable(name = "peopleId")Long peopleId,
                                                @PathVariable(name = "petId")Long petId){
         return convertToResource(petService.getPetByIdAndPersonProfileId(peopleId,petId));
     }
 
 
-    @PostMapping("/people/{peopleId}/pets")
+    @PostMapping
     public PetResource createPet(@PathVariable(name = "peopleId")Long peopleId,
                                  @Valid @RequestBody SavePetResource resource){
         return convertToResource(petService.createPet(peopleId,convertToEntity(resource)));
     }
 
-    @PutMapping("/people/{peopleId}/pets/{petId}")
+    @PutMapping("/{petId}")
     public PetResource updatePet(@PathVariable(name = "peopleId")Long peopleId,
                                  @PathVariable(name = "petId")Long petId,
                                  @Valid @RequestBody SavePetResource resource){
         return convertToResource(petService.updatePet(peopleId,petId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("people/{peopleId}/pets/{petId}")
+    @DeleteMapping("/{petId}")
     public ResponseEntity<?> deletePet(@PathVariable(name = "peopleId")Long peopleId,
                                        @PathVariable(name = "petId")Long petId){
         return petService.deletePet(peopleId,petId);

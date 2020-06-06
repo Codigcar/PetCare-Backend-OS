@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin/roles/{rolesId}/accounts")
 public class AccountController {
 
     //
@@ -30,7 +30,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("/roles/{rolesId}/accounts")
+    @GetMapping
     public Page<AccountResource> getAllAccountsByRolId(@PathVariable(name = "rolesId")Long rolesId,
                                                         Pageable pageable){
         Page<Account> accountPage=accountService.getAllAccountsByRolId(rolesId,pageable);
@@ -38,27 +38,27 @@ public class AccountController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @GetMapping("/roles/{rolesId}/accounts/{accountId}")
+    @GetMapping("/{accountId}")
     public AccountResource getAccountByIdAndRolId(@PathVariable(name = "rolesId")Long rolId,
                                                @PathVariable(name = "accountId")Long accountId){
         return convertToResource(accountService.getAccountByIdAndRolId(rolId,accountId));
     }
 
 
-    @PostMapping("/roles/{rolesId}/accounts")
+    @PostMapping
     public AccountResource createAccount(@PathVariable(name = "rolesId")Long rolesId,
                                  @Valid @RequestBody SaveAccountResource resource){
         return convertToResource(accountService.createAccountService(rolesId,convertToEntity(resource)));
     }
 
-    @PutMapping("/roles/{rolesId}/accounts/{accountId}")
+    @PutMapping("/{accountId}")
     public AccountResource updateAccount(@PathVariable(name = "rolesId")Long rolesId,
                                  @PathVariable(name = "accountId")Long accountId,
                                  @Valid @RequestBody SaveAccountResource resource){
         return convertToResource(accountService.updateAccountService(rolesId,accountId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("/roles/{rolesId}/accounts/{accountId}")
+    @DeleteMapping("/{accountId}")
     public ResponseEntity<?> deleteAccount(@PathVariable(name = "rolesId")Long rolesId,
                                        @PathVariable(name = "accountId")Long accountId){
         return accountService.deleteAccountService(rolesId,accountId);

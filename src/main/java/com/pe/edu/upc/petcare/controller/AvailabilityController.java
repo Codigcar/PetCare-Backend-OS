@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/business/{businessId}/providers/{providerId}/provider-join-products/{providerJoinProductId}")
+@RequestMapping("/api/business/{businessId}/providers/{providerId}/product-types/{producttypeId}/products/{productId}/availabilities")
 public class AvailabilityController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private AvailabilityService availabilityService;
 
-    @GetMapping("/products/{productId}/availabilities")
+    @GetMapping
     public Page<AvailabilityResource> getAllAvailabilitiesByCustomerId(@PathVariable(name = "productId")Long productId,
                                                     Pageable pageable){
         Page<Availability> availabilityPage=availabilityService.getAllAvailabilitiesByProductId(productId,pageable);
@@ -34,13 +34,13 @@ public class AvailabilityController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/products/{productId}/availabilities")
+    @PostMapping
     public AvailabilityResource createAvailability(@PathVariable(name = "productId")Long productId,
                                  @Valid @RequestBody SaveAvailabilityResource resource){
         return convertToResource(availabilityService.createAvailability(productId,convertToEntity(resource)));
     }
 
-    @PutMapping("/products/{productId}/availabilities{availabilityId}")
+    @PutMapping("/{availabilityId}")
     public AvailabilityResource updateAvailability(@PathVariable(name = "productId")Long productId,
                                  @PathVariable(name = "availabilityId")Long availabilityId,
                                  @Valid @RequestBody SaveAvailabilityResource resource){

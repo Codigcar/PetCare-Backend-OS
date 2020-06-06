@@ -22,14 +22,14 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/business/{businessId}/providers/{providerId}/product-types/{productTypeId}/")
+@RequestMapping("/api/business/{businessId}/providers/{providerId}/product-types/{productTypeId}/provider-join-products/{providerJoinProductId}/products")
 public class ProviderProductsController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private ProductService productService;
 
-    @GetMapping("provider-join-products/{providerJoinProductId}/products")
+    @GetMapping
     public Page<ProductResource> GetAllByProviderJoinTypeProductId(@PathVariable(name = "providerJoinProductId")Long providerJoinProductId,
                                                                    Pageable pageable){
         Page<Product> productPage=productService.getAllByProviderJoinTypeProductId(providerJoinProductId,pageable);
@@ -37,20 +37,20 @@ public class ProviderProductsController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("provider-join-products/{providerJoinProductId}/products")
+    @PostMapping
     public ProductResource createProduct (@PathVariable(name = "providerJoinProductId") Long providerJoinProductId,
                                           @Valid @RequestBody SaveProductResource resource){
         return convertToResource(productService.createProduct(providerJoinProductId,convertToEntity(resource)));
     }
 
-    @PutMapping("provider-join-products/{providerJoinProductId}/products/{productId}")
+    @PutMapping("/{productId}")
     public ProductResource updateProduct(@PathVariable("providerJoinProductId")Long providerJoinProductId,
                                          @PathVariable(name = "productId")Long productId,
                                          @Valid @RequestBody SaveProductResource resource){
         return convertToResource(productService.updateProduct(providerJoinProductId,productId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("provider-join-products/{providerJoinProductId}/products/{productId}")
+    @DeleteMapping("/{productId}")
     public ResponseEntity<?> deleteProduct(@PathVariable(name = "providerJoinProductId")Long providerJoinProductId,
                                            @PathVariable(name = "productId")Long productId){
         return productService.deleteProduct(providerJoinProductId,productId);

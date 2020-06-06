@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/people/{peopleId}/providers/{providerId}/affiliations")
+@RequestMapping("/api/people/{personId}/providers/{providerId}/affiliations")
 public class PersonAffiliateController {
 
     @Autowired
@@ -33,11 +33,11 @@ public class PersonAffiliateController {
     private ProviderService providerService;
 
     @PostMapping
-    public AffiliationResource create(  @PathVariable("peopleId") Long peopleId,
+    public AffiliationResource create(  @PathVariable("personId") Long personId,
                                         @PathVariable("providerId") Long providerId,
                                             @RequestBody SaveAffiliationResource resource){
 
-        return convertToResource(affiliationService.create(peopleId,providerId,convertToEntity(resource)));
+        return convertToResource(affiliationService.create(personId,providerId,convertToEntity(resource)));
     }
 
     private Affiliation convertToEntity(SaveAffiliationResource resource) {

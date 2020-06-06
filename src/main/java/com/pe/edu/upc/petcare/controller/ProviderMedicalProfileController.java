@@ -72,7 +72,7 @@ public class ProviderMedicalProfileController {
         return convertToResource(medicalProfileService.createProfile(petId, providerProfileService.getProviderById(providerId),convertToEntity(resource)));
     }
 
-    @PutMapping("{petprofileId}")
+    @PutMapping("/{petprofileId}")
     public MedicalProfileResource updateProfile(@PathVariable(name = "providerId")Long providerId,@PathVariable(name = "petId")Long petId, @PathVariable(name = "personId")Long customerId,
                                                 @PathVariable(name = "petprofileId")Long profileId,
                                                 @Valid @RequestBody SaveMedicalProfileResource resource){
@@ -83,7 +83,7 @@ public class ProviderMedicalProfileController {
     }
 
 
-    @DeleteMapping("{petprofileId}")
+    @DeleteMapping("/{petprofileId}")
     public ResponseEntity<?> deleteProfile(@PathVariable(name = "petId")Long petId,@PathVariable(name = "personId")Long customerId,
                                            @PathVariable(name = "petprofileId")Long profileId){
 

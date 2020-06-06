@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RequestMapping("/api/business/{businessId}")
+@RequestMapping("/api/business/{businessId}/provider/{providerId}/products/{productId}/provider-join-products")
 @RestController
 public class ProviderJoinProductTypeController {
     @Autowired
@@ -18,7 +18,7 @@ public class ProviderJoinProductTypeController {
     @Autowired
     private ProviderJoinProductService providerJoinProductService;
 
-    @PostMapping("/provider/{providerId}/products/{productId}/provider-join-products")
+    @PostMapping
     public ProviderJoinProductResource createRelationship(@PathVariable(name = "providerId")Long providerId,
                                                           @PathVariable(name = "productId")Long productId,
                                                           @Valid @RequestBody SaveProviderJoinProductResource resource){

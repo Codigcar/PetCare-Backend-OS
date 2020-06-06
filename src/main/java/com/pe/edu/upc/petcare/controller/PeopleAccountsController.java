@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/people")
 public class PeopleAccountsController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class PeopleAccountsController {
     private PersonProfileService personProfileService;
 
 
-    @GetMapping("/people")
+    @GetMapping
     public Page<PersonProfileResource> getAllCustomers(Pageable pageable){
         List<PersonProfileResource> customers = personProfileService.getAllCustomers(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
@@ -36,23 +36,23 @@ public class PeopleAccountsController {
         return new PageImpl<>(customers,pageable,customerCount);
     }
 
-    @GetMapping("/people/{id}")
+    @GetMapping("/{id}")
     public PersonProfileResource getCustomerById(@PathVariable(name = "id")Long peopleId){
         return convertToResource(personProfileService.getPersonById(peopleId));
     }
 
-    @PostMapping("/people")
+    @PostMapping
     public PersonProfileResource createCustomer(@Valid @RequestBody SavePersonProfileResource resource){
         return convertToResource(personProfileService.createCustomer(convertToEntity(resource)));
     }
 
-    @PutMapping("/people/{id}")
+    @PutMapping("/{id}")
     public PersonProfileResource updateCustomer(@PathVariable(name = "id")Long peopleId,
                                                 @Valid @RequestBody SavePersonProfileResource resource){
         return convertToResource(personProfileService.updateCustomer(peopleId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("/people/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable(name = "id") Long peopleId){
         return personProfileService.deleteCustomer(peopleId);
     }

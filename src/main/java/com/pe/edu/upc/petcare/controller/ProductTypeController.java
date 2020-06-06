@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin/product-types")
 public class ProductTypeController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private ProductTypeService productTypeService;
 
-    @GetMapping("/typeProducts")
+    @GetMapping
     public Page<ProductTypeResource> getAllServiceType(Pageable pageable)
     {
         List<ProductTypeResource> serviceType = productTypeService.getAllServiceType(pageable)
@@ -33,23 +33,23 @@ public class ProductTypeController {
         return new PageImpl<>(serviceType,pageable,serviceTypeCount);
     }
 
-    @GetMapping("/typeProducts/{id}")
+    @GetMapping("/{id}")
     public ProductTypeResource getServiceTypeById(@PathVariable(name = "id")Long serviceTypeId){
         return convertToResource(productTypeService.getServiceTypeById(serviceTypeId));
     }
 
-    @PostMapping("/typeProducts")
+    @PostMapping
     public ProductTypeResource createServiceType (@Valid @RequestBody SaveProductTypeResource resource){
         return convertToResource(productTypeService.createServiceType(convertToEntity(resource)));
     }
 
-    @PutMapping("/typeProducts/{id}")
+    @PutMapping("/{id}")
     public ProductTypeResource updateServiceType (@PathVariable(name = "id")Long serviceTypeId,
                                                   @Valid @RequestBody SaveProductTypeResource resource){
         return convertToResource(productTypeService.updateServiceType(serviceTypeId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("/typeProducts/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteServiceType (@PathVariable(name = "id") Long serviceTypeId){
         return productTypeService.deleteServiceType(serviceTypeId);
     }

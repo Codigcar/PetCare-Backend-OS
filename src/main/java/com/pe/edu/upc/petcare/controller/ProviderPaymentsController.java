@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/business/{businessId}/providers/{providerId}/payments")
 public class ProviderPaymentsController {
     @Autowired
     private ModelMapper mapper;
@@ -25,7 +25,7 @@ public class ProviderPaymentsController {
     @Autowired
     private PaymentService paymentService;
 
-    @GetMapping("/providers/{providerId}/payments")
+    @GetMapping
     public Page<PaymentResource> getAllPaymentsByProviderId(@PathVariable(name = "providerId")Long providerId,
                                              Pageable pageable)
     {
@@ -34,27 +34,27 @@ public class ProviderPaymentsController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @GetMapping("/provider/{providerId}/payments/{paymentId}")
+    @GetMapping("/{paymentId}")
     public PaymentResource getPaymentByIdProviderId(@PathVariable(name = "providerId")Long providerId,
                                                   @PathVariable(name = "paymentId")Long paymentId){
         return convertToResource(paymentService.getByIdAndProviderId(providerId,paymentId));
     }
 
 
-    @PostMapping("/providers/{providerId}/payments")
+    @PostMapping
     public PaymentResource createPayment(@PathVariable(name = "providerId")Long providerId,
                                          @Valid @RequestBody SavePaymentResource resource){
         return convertToResource(paymentService.createPayment(providerId,convertToEntity(resource)));
     }
 
-    @PutMapping("/providers/{providerId}/payments/{paymentId}")
+    @PutMapping("/{paymentId}")
     public PaymentResource updatePayment(@PathVariable(name = "providerId")Long providerId,
                                          @PathVariable(name = "paymentId")Long paymentId,
                                          @Valid @RequestBody SavePaymentResource resource){
         return convertToResource(paymentService.updatePayment(providerId,paymentId,convertToEntity(resource)));
     }
 
-    @DeleteMapping("/providers/{providerId}/payments/{paymentId}")
+    @DeleteMapping("/{paymentId}")
     public ResponseEntity<?> deletePayment(@PathVariable(name = "providerId")Long providerId,
                                            @PathVariable(name = "paymentId")Long paymentId){
         return paymentService.deletePayment(providerId,paymentId);
