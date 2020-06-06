@@ -1,0 +1,47 @@
+package com.pe.edu.upc.petcare;
+
+import com.pe.edu.upc.petcare.model.Rol;
+import cucumber.api.java.en.Then;
+import io.cucumber.java.en.Given;
+import lombok.extern.log4j.Log4j2;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+
+@Log4j2
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+public class StepDefinitions {
+
+    @LocalServerPort
+    private int port;
+    private RestTemplate restTemplate = new RestTemplate();
+    private String postUrl = "http://localhost";
+    private long postId = 0;
+
+    @Given("^I sending post to be created with rol id (.*), name (.*)$")
+    public void i_sending_post_to_be_created_with_rol_id_name_customer(String rol_id,String name) {
+        String url = postUrl + ":" + port + "/api/admin/roles";
+        Rol newRol = new Rol();
+        newRol.setId((long) Integer.parseInt(rol_id));
+        newRol.setName(name);
+        Rol rol = restTemplate.postForObject(url, newRol, Rol.class);
+        postId = rol.getId();
+        log.info(rol);
+        assertEquals(rol.getName(),"customer");
+    }
+
+
+
+
+
+
+}

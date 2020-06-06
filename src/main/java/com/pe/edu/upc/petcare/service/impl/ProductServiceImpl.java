@@ -25,12 +25,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product createProduct(Long providerJoinTypeProductId,Product product) {
-        return providerJoinProductTypeRepository.findById(providerJoinTypeProductId).map(providerJoinTypeProduct -> {
+    public Product createProduct(Long joinId,Product product) {
+        return providerJoinProductTypeRepository.findById(joinId).map(providerJoinTypeProduct -> {
             product.setProviderJoinProductType(providerJoinTypeProduct);
             return productRepository.save(product);
         }).orElseThrow(()->new ResourceNotFoundException(
-                "Provider Join TypeProduct" + "Id" + providerJoinTypeProductId));
+                "Provider Join TypeProduct" + "Id" + joinId));
     }
 
     @Override
