@@ -47,5 +47,6 @@ public class PersonAffiliateController {
     private AffiliationResource convertToResource(Affiliation entity) {
         return mapper.map(entity, AffiliationResource.class);
     }
+    //
 
 }
