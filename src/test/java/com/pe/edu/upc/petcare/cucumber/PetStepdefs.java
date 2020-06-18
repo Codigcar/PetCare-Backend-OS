@@ -25,11 +25,6 @@ public class PetStepdefs {
     private long postId = 0;
 
 
-    @Given("El usuario registra sus datos")
-    public void elUsuarioRegistraSusDatos() {
-
-    }
-
   @When("^El usuario registra una mascota con name (.*), age (.*), breed (.*), photo (.*), gender (.*)$")
     public void elUsuarioRegistraUnaMascotaConNameNameAgeAgeBreedBreedPhotoPhotoGenderGender(String name, Integer age, String breed, String photo, String gender ) {
         String url = Url + ":" + port + "/api/people/1/pets";
