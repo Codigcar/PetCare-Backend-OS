@@ -1,12 +1,12 @@
 Feature: RolTest
 
   Scenario Outline: As a rol I want to create a new rol
-    And I sending post to be created with rol id <rol_id>, name <name>
+    And I sending post to be created with name <name>
 
 
     Examples:
-    | rol_id  | name          |
-    | 1       | customer      |
+     | name          |
+     | bb            |
 
 
 

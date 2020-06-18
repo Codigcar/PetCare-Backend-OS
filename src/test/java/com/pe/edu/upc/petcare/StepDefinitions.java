@@ -29,19 +29,18 @@ public class StepDefinitions {
     private long postId = 0;
 
 
-    @Given("^I sending post to be created with rol id (.*), name (.*)$")
-    public void i_sending_post_to_be_created_with_rol_id_name_customer(String rol_id,String name) {
+    @Given("^I sending post to be created with name (.*)$")
+    public void i_sending_post_to_be_created_with_rol_id_name_customer(String name) {
         String url = postUrl + ":" + port + "/api/admin/roles";
         Rol newRol = new Rol();
-        newRol.setId((long) Integer.parseInt(rol_id));
         newRol.setName(name);
         Rol rol = restTemplate.postForObject(url, newRol, Rol.class);
         postId = rol.getId();
         log.info(rol);
-        assertEquals(rol.getName(),"customer");
+        assertEquals(rol.getName(),"bb");
     }
 
-    @Given("^I sending SubscriptionPlan to be created with subscriptionPlan_id (.*),name (.*), description (.*),duration (.*), price (.*)$")
+  /*  @Given("^I sending SubscriptionPlan to be created with subscriptionPlan_id (.*),name (.*), description (.*),duration (.*), price (.*)$")
     public void i_sending_SubscriptionPlan_to_be_created_with_subscriptionPlan_id_name_Basico_description_plan_Basico_duration_price(String id,String name, String description, String duration, String price) {
         String url = postUrl + ":" + port + "/api/admin/subscription-plan";
         SubscriptionPlan newSubscription = new SubscriptionPlan();
@@ -53,7 +52,7 @@ public class StepDefinitions {
         log.info(subscriptionPlan);
         assertEquals(subscriptionPlan.getName(),"Basico");
     }
-
+*/
 
 
 
