@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PetServiceImpl implements PetService {
 
@@ -20,12 +22,12 @@ public class PetServiceImpl implements PetService {
     private PersonProfileRepository personProfileRepository;
 
     @Override
-    public Page<Pet> getAllPetsByPersonProfileId(Long personId, Pageable pageable) {
+    public List<Pet> getAllPetsByPersonProfileId(Long personId, Pageable pageable) {
         return petRepository.findByPersonProfileId(personId,pageable);
     }
 
     @Override
-    public Pet getPetByIdAndPersonProfileId(Long personId, Long petId) {
+    public Pet getPetByPeopleId(Long personId, Long petId) {
         return petRepository.findByIdAndPersonProfileId(petId,personId)
                 .orElseThrow(()->new ResourceNotFoundException(
                         "Pet not found with Id"+petId+

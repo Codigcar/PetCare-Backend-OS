@@ -68,7 +68,7 @@ public class ProviderMedicalProfileController {
                                                 @Valid @RequestBody SaveMedicalProfileResource resource){
 
         personProfileService.getPersonById(customerId);
-        petService.getPetByIdAndPersonProfileId(customerId,petId);
+        petService.getPetByPeopleId(customerId,petId);
         return convertToResource(medicalProfileService.createProfile(petId, providerProfileService.getProviderById(providerId),convertToEntity(resource)));
     }
 
@@ -78,7 +78,7 @@ public class ProviderMedicalProfileController {
                                                 @Valid @RequestBody SaveMedicalProfileResource resource){
 
         personProfileService.getPersonById(customerId);
-        petService.getPetByIdAndPersonProfileId(customerId,petId);
+        petService.getPetByPeopleId(customerId,petId);
         return convertToResource(medicalProfileService.updateProfile(petId,providerProfileService.getProviderById(providerId),profileId,convertToEntity(resource)));
     }
 
@@ -88,7 +88,7 @@ public class ProviderMedicalProfileController {
                                            @PathVariable(name = "petprofileId")Long profileId){
 
         personProfileService.getPersonById(customerId);
-        petService.getPetByIdAndPersonProfileId(customerId,petId);
+        petService.getPetByPeopleId(customerId,petId);
         return medicalProfileService.deleteProfile(petId,profileId);
     }
 

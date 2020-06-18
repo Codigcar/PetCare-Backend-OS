@@ -43,7 +43,7 @@ public class ProviderMedicalRecordController {
     public MedicalRecordResource getMedicalRecordByIdAndMedicalProfileId(@PathVariable(name = "medicalRecordsId")Long medicalRecordId,@PathVariable(name = "petprofileId")Long profileId,@PathVariable(name = "petId")Long petId,@PathVariable(name = "personId")Long personId,
                                                                                  @Valid @RequestBody SaveMedicalRecordResource resource){
         personProfileService.getPersonById(personId);
-        petService.getPetByIdAndPersonProfileId(personId,petId);
+        petService.getPetByPeopleId(personId,petId);
         medicalProfileService.getProfileByIdAndPetId(petId,profileId);
 
         return convertToResource(medicalRecordService.getMedicalRecordByIdAndMedicalProfileId(profileId,medicalRecordId));
@@ -55,7 +55,7 @@ public class ProviderMedicalRecordController {
 
 
         personProfileService.getPersonById(customerId);
-        petService.getPetByIdAndPersonProfileId(customerId,petId);
+        petService.getPetByPeopleId(customerId,petId);
         medicalProfileService.getProfileByIdAndPetId(petId,profileId);
 
         return convertToResource(medicalRecordService.createMedicalRecord(profileId,convertToEntity(resource)));

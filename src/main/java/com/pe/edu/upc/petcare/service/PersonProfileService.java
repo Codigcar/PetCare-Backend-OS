@@ -5,8 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface PersonProfileService {
-    Page<PersonProfile> getAllCustomers(Pageable pageable);
+    List<PersonProfile> getAllCustomers();
     PersonProfile getPersonById(Long personId);
     PersonProfile createCustomer(PersonProfile personProfile);
     PersonProfile updateCustomer(Long customerId, PersonProfile personProfileRequest);

@@ -48,7 +48,7 @@ public class ProviderVaccinationRecordController {
     public VaccinationRecordResource getVaccinationRecordByIdAndMedicalProfileId(@PathVariable(name = "vaccinationId")Long vaccinationId,@PathVariable(name = "petprofileId")Long profileId,@PathVariable(name = "petId")Long petId,@PathVariable(name = "personId")Long personId,
                                                @Valid @RequestBody SaveVaccinationRecordResource resource){
         personProfileService.getPersonById(personId);
-        petService.getPetByIdAndPersonProfileId(personId,petId);
+        petService.getPetByPeopleId(personId,petId);
         medicalProfileService.getProfileByIdAndPetId(petId,profileId);
 
         return convertToResource(vaccinationRecordService.getVaccinationRecordByIdAndMedicalProfileId(profileId,vaccinationId));
@@ -62,7 +62,7 @@ public class ProviderVaccinationRecordController {
 
 
         personProfileService.getPersonById(customerId);
-        petService.getPetByIdAndPersonProfileId(customerId,petId);
+        petService.getPetByPeopleId(customerId,petId);
         medicalProfileService.getProfileByIdAndPetId(petId,profileId);
         return convertToResource(vaccinationRecordService.createVaccinationRecord(profileId,convertToEntity(resource)));
     }
@@ -72,7 +72,7 @@ public class ProviderVaccinationRecordController {
                                                              @Valid @RequestBody SaveVaccinationRecordResource resource){
 
         personProfileService.getPersonById(customerId);
-        petService.getPetByIdAndPersonProfileId(customerId,petId);
+        petService.getPetByPeopleId(customerId,petId);
         medicalProfileService.getProfileByIdAndPetId(petId,profileId);
         return convertToResource(vaccinationRecordService.updateVaccinationRecord(profileId,vaccinationId,convertToEntity(resource)));
     }
@@ -83,7 +83,7 @@ public class ProviderVaccinationRecordController {
                                        @PathVariable(name = "petprofileId")Long profileId,@PathVariable(name = "vaccinationId")Long vaccinationId){
 
         personProfileService.getPersonById(customerId);
-        petService.getPetByIdAndPersonProfileId(customerId,petId);
+        petService.getPetByPeopleId(customerId,petId);
         medicalProfileService.getProfileByIdAndPetId(petId,profileId);
         return vaccinationRecordService.deleteVaccinationRecord(profileId,vaccinationId);
 

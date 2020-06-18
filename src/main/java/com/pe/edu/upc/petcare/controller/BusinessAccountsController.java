@@ -11,12 +11,13 @@ import com.pe.edu.upc.petcare.service.PersonProfileService;
 import com.pe.edu.upc.petcare.service.ProviderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/business")
@@ -29,8 +30,14 @@ public class BusinessAccountsController {
     private BusinessProfileService businessProfileService;
 
     @PostMapping
-    public BusinessProfileResource create( @RequestBody SaveBusinessProfileResource resource){
+    public BusinessProfileResource registerBusiness( @RequestBody SaveBusinessProfileResource resource){
         return convertToResource(businessProfileService.create(convertToEntity(resource)));
+    }
+    @GetMapping
+    public ResponseEntity<List<BusinessProfileResource>> getAllBusiness(Pageable pageable){
+        List<BusinessProfile> businessProfiles = businessProfileService.getAllBusiness();
+        List<BusinessProfileResource> businessProfilesResources = businessProfiles.stream().map(this::convertToResource).collect(Collectors.toList());
+        return ResponseEntity.ok(businessProfilesResources);
     }
 
     private BusinessProfile convertToEntity(SaveBusinessProfileResource resource) {

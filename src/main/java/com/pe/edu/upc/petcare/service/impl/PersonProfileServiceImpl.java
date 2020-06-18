@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonProfileServiceImpl implements PersonProfileService {
 
@@ -31,8 +33,8 @@ public class PersonProfileServiceImpl implements PersonProfileService {
     private SubscriptionPlanRepository subscriptionPlanRepository;
     
     @Override
-    public Page<PersonProfile> getAllCustomers(Pageable pageable) {
-        return personProfileRepository.findAll(pageable);
+    public List<PersonProfile> getAllCustomers() {
+        return personProfileRepository.findAll();
     }
 
     @Override

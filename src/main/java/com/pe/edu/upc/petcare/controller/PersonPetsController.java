@@ -27,17 +27,17 @@ public class PersonPetsController {
     private PetService petService;
 
     @GetMapping
-    public Page<PetResource> getAllPetsByCustomerId(@PathVariable(name = "peopleId")Long peopleId,
+    public ResponseEntity<List<PetResource>> getAllPetsByCustomerId(@PathVariable(name = "peopleId")Long peopleId,
                                                     Pageable pageable){
-        Page<Pet> petPage=petService.getAllPetsByPersonProfileId(peopleId,pageable);
-        List<PetResource>  resources=petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources,pageable,resources.size());
+        List<Pet> pets =petService.getAllPetsByPersonProfileId(peopleId,pageable);
+        List<PetResource>  resources=pets.stream().map(this::convertToResource).collect(Collectors.toList());
+        return ResponseEntity.ok(resources);
     }
 
     @GetMapping("/{petId}")
-    public PetResource getPetByIdAndCustomerId(@PathVariable(name = "peopleId")Long peopleId,
-                                               @PathVariable(name = "petId")Long petId){
-        return convertToResource(petService.getPetByIdAndPersonProfileId(peopleId,petId));
+    public PetResource getPetByPeopleId(@PathVariable(name = "peopleId")Long peopleId,
+                                        @PathVariable(name = "petId")Long petId){
+        return convertToResource(petService.getPetByPeopleId(peopleId,petId));
     }
 
 

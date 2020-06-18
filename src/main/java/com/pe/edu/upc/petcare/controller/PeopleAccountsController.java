@@ -29,11 +29,10 @@ public class PeopleAccountsController {
 
 
     @GetMapping
-    public Page<PersonProfileResource> getAllCustomers(Pageable pageable){
-        List<PersonProfileResource> customers = personProfileService.getAllCustomers(pageable)
-                .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        int customerCount = customers.size();
-        return new PageImpl<>(customers,pageable,customerCount);
+    public ResponseEntity<List<PersonProfileResource>> getAllPeople(Pageable pageable){
+        List<PersonProfile> personProfiles = personProfileService.getAllCustomers();
+        List<PersonProfileResource>personProfileResources = personProfiles.stream().map(this::convertToResource).collect(Collectors.toList());
+        return ResponseEntity.ok(personProfileResources);
     }
 
     @GetMapping("/{id}")

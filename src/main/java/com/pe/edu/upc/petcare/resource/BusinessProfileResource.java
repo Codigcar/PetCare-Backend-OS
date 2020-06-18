@@ -13,4 +13,5 @@ public class BusinessProfileResource {
     private String email;
     private Long phone;
     private Integer age;
+    private boolean owner;
 }

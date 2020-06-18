@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RolServiceImpl implements RolService {
     @Autowired
@@ -18,6 +20,11 @@ public class RolServiceImpl implements RolService {
     public Rol createRol(Rol rol)
     {
         return rolRepository.save(rol);
+    }
+
+    @Override
+    public List<Rol> getAllRoles() {
+        return rolRepository.findAll();
     }
 
 }
