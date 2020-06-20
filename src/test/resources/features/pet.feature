@@ -1,4 +1,4 @@
-Feature: La app permite el registro de una mascota
+Feature: La aplicacion permite el registro de una mascota
   Yo como dueño de una mascota quiero registrar los datos de mi mascota para poder acceder a los servicios del sitio
   Scenario Outline: Registro de una mascota
     Given El usuario se haya registrado
