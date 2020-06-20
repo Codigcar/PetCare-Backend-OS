@@ -46,7 +46,7 @@ public class BusinessProfile extends Profile {
     private Long phone;
 
     @javax.validation.constraints.NotNull(message = "the age can't be empty")
-    private Integer age;
+    private int age;
 
     private boolean owner;
 
