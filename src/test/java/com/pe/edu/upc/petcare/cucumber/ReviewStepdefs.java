@@ -1,6 +1,7 @@
 package com.pe.edu.upc.petcare.cucumber;
 
 import com.pe.edu.upc.petcare.model.Review;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import lombok.extern.log4j.Log4j2;
 import org.junit.runner.RunWith;
@@ -29,5 +30,10 @@ public class ReviewStepdefs {
         postId = review.getId();
         System.out.println(postId);
         assertEquals(review.getCommentary(),"excelente");
+    }
+
+    @And("bb <name>")
+    public void bbName() {
+
     }
 }

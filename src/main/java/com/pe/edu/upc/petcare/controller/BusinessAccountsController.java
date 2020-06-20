@@ -28,6 +28,11 @@ public class BusinessAccountsController {
 
     @Autowired
     private BusinessProfileService businessProfileService;
+//
+    @GetMapping("/{id}")
+    public BusinessProfileResource getBusinessById(@PathVariable(name = "id")Long businessId){
+        return convertToResource(businessProfileService.getBusinessById(businessId));
+    }
 
     @PostMapping
     public BusinessProfileResource registerBusiness( @RequestBody SaveBusinessProfileResource resource){

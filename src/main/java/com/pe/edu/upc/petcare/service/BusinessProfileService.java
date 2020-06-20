@@ -8,4 +8,5 @@ import java.util.List;
 public interface BusinessProfileService {
     BusinessProfile create (BusinessProfile businessProfile);
     List<BusinessProfile> getAllBusiness();
+    BusinessProfile getBusinessById(Long businessId);
 }
