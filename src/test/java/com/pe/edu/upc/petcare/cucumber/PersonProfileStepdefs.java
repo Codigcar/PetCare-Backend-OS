@@ -13,10 +13,10 @@ import org.springframework.web.client.RestTemplate;
 
 import static junit.framework.TestCase.assertEquals;
 
-
+/*
 @Log4j2
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)*/
 public class PersonProfileStepdefs {
 
     @LocalServerPort
