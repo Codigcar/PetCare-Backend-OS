@@ -1,5 +1,3 @@
-package com.pe.edu.upc.petcare;
-
 import com.pe.edu.upc.petcare.model.PersonProfile;
 import com.pe.edu.upc.petcare.model.Pet;
 import com.pe.edu.upc.petcare.model.Rol;

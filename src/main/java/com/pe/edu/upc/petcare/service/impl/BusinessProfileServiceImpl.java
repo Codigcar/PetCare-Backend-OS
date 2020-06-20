@@ -75,4 +75,9 @@ public class BusinessProfileServiceImpl implements BusinessProfileService {
     public List<BusinessProfile> getAllBusiness() {
         return businessProfileRepository.findAll();
     }
+
+    @Override
+    public BusinessProfile getBusinessById(Long businessId) {
+        return businessProfileRepository.findById(businessId).orElse(null);
+    }
 }

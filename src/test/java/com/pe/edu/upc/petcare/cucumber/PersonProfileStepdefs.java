@@ -28,31 +28,28 @@ public class PersonProfileStepdefs {
     @Given("El usuario ingresa a la aplicacion web")
     public void elUsuarioIngresaALaAplicacionWeb() {
     }
-
-    @When("^EL usuario crea su perfil con name (.*), password (.*),lastName (.*), document (.*), email (.*), phone(.*), age(.*)$")
-    public void elUsuarioSuPerfilConPersonprofile_idIdNameNamePasswordPasswordLastNameLastNameDocumentDocumentEmailEmailPhonePhoneAgeAge(
-            String name, String password, String lastname, Long document, String email, Long phone, Integer age) {
-
+    @When("^EL usuario crea su perfil con name (.*), password (.*), lastname (.*), document (.*), email (.*), phone (.*) , age (.*)$")
+    public void bb_name_name11_password_password11_asd_lastname2_document_email_carlos2323as_gmail_com_phone_age(
+            String name, String password, String asd, Long document, String email, Long phone, Integer age) {
         String url = Url + ":" + port + "/api/people";
         PersonProfile newpersonProfile = new PersonProfile();
         newpersonProfile.setName(name);
         newpersonProfile.setPassword(password);
-        newpersonProfile.setLastName(lastname);
+        newpersonProfile.setLastName(asd);
         newpersonProfile.setDocument(document);
         newpersonProfile.setEmail(email);
         newpersonProfile.setPhone(phone);
         newpersonProfile.setAge(age);
         PersonProfile personProfile = restTemplate.postForObject(url, newpersonProfile, PersonProfile.class);
         postId = personProfile.getId();
-        System.out.println(postId);
-        assertEquals(personProfile.getName(),"carlos");
+        assertEquals(personProfile.getName(),"name2");
     }
+
 
     @Then("Verficar si se ha creado un perfil de usuario")
     public void verficarSiSeHaCreadoUnPerfilDeUsuario() {
         String url = Url + ":" + port + "/api/people/"+ postId;
-        System.out.println(postId);
         PersonProfile personProfileBD = restTemplate.getForObject(url, PersonProfile.class);
-        assertEquals(personProfileBD.getName(),"carlos");
+        assertEquals(personProfileBD.getName(),"name2");
     }
 }
