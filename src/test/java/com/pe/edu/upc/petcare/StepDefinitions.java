@@ -1,9 +1,12 @@
 package com.pe.edu.upc.petcare;
 
+import com.pe.edu.upc.petcare.model.PersonProfile;
+import com.pe.edu.upc.petcare.model.Pet;
 import com.pe.edu.upc.petcare.model.Rol;
 import com.pe.edu.upc.petcare.model.SubscriptionPlan;
 import cucumber.api.java.en.Then;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import lombok.extern.log4j.Log4j2;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,6 +42,7 @@ public class StepDefinitions {
         log.info(rol);
         assertEquals(rol.getName(),"bb");
     }
+
 
   /*  @Given("^I sending SubscriptionPlan to be created with subscriptionPlan_id (.*),name (.*), description (.*),duration (.*), price (.*)$")
     public void i_sending_SubscriptionPlan_to_be_created_with_subscriptionPlan_id_name_Basico_description_plan_Basico_duration_price(String id,String name, String description, String duration, String price) {

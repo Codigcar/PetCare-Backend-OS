@@ -5,6 +5,7 @@ Feature: La app permite el registro de una mascota
     When El usuario registra una mascota con name <name>, age <age>, breed <breed>, photo <photo>, gender <gender>
     Then Verificar que se ha registrado la nueva mascota
 
+
     Examples:
         | name  | age | breed    | photo    | gender |
-        | holamundo | 2   | pitbull  | asdasdss  | macho  |
+        | nuevamascota | 2   | pitbull  | asdass2asdss  | macho  |
