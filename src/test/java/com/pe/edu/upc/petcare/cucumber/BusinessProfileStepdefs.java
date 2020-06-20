@@ -26,6 +26,7 @@ public class BusinessProfileStepdefs {
     @Given("El business ingresa a la aplicacion web")
     public void elBusinessIngresaALaAplicacionWeb() {
     }
+
     @When("^EL business perteneciente a una veterinaria crea su perfil con name (.*), password (.*), lastname (.*), document (.*), email (.*), phone (.*) , age (.*), owner (.*)$")
     public void el_business_perteneciente_a_una_veterinaria_crea_su_perfil_con_name_business1_password_password_lastname_lastname1_document_email_business331_gmail_com_phone_age_owner_true(
         String name, String password, String asd, Long document, String email, Long phone, int age, Boolean owner) {

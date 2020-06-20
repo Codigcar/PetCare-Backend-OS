@@ -7,8 +7,6 @@ import lombok.Setter;
 @Setter
 public class PaymentResource {
     private Long id;
-    private Long cardNumber;
-    private String name;
-    private Integer cvvNumber;
-    private String expiryDate;
+
+
 }

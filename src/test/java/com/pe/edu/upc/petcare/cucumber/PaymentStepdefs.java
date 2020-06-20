@@ -1,7 +1,7 @@
 package com.pe.edu.upc.petcare.cucumber;
 
-import com.pe.edu.upc.petcare.model.PersonProfile;
-import com.pe.edu.upc.petcare.model.Provider;
+import com.pe.edu.upc.petcare.model.*;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,6 +25,14 @@ public class PaymentStepdefs {
     private String Url = "http://localhost";
     private long postId = 0;
 
+
+    @Given("El business ingresa a la aplicacion web") //El business se haya registrado
+    public void elBusinessIngresaALaAplicacionWeb() {
+        String url = Url + ":" + port + "/api/business/1";
+        BusinessProfile businessProfileBD = restTemplate.getForObject(url, BusinessProfile.class);
+        assertEquals(businessProfileBD.getName(),"business1");
+    }
+
     @Given("El veterinario se haya registrado")
     public void elVeterinarioIngresaALaAplicacionWeb() {
         String url = Url + ":" + port + "/api/business/1/providers/1";
@@ -32,14 +40,26 @@ public class PaymentStepdefs {
         assertEquals(providerBD.getEmail(),"business331@gmail.com");
     }
 
-
     @When("^El veterinario registra su tarjeta con card number(.*), card name (.*), cvv number (.*), expiry date (.*)$")
     public void elVeterinarioRegistraSuTarjetaConCardNumberCard_numberCardNameCard_nameCvvNumberCvv_numberExpiryDateExpiry_date(
-            
+            Long cardNumber, String name, Integer cvvNumber, String expiryDate
     ) {
+        String url = Url + ":" + port + "/api/business/1/providers/1/payments";
+        Payment newpayment = new Payment();
+        newpayment.setCardName(name);
+        newpayment.setCardNumber(cardNumber);
+        newpayment.setCvvNumber(cvvNumber);
+        newpayment.setExpiryDate(expiryDate);
+        Payment payment = restTemplate.postForObject(url, newpayment, Payment.class);
+        postId = payment.getId();
+        System.out.println(postId);
+        
     }
 
     @Then("Verificar si se ha registrado la tarjeta")
     public void verificarSiSeHaRegistradoLaTarjeta() {
+        String url = Url + ":" + port + "/api/business/1/providers/1/payments/"+ postId;
+        System.out.println(postId);
+        Payment paymentBD = restTemplate.getForObject(url, Payment.class);
     }
 }
