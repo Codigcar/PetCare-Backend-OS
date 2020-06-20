@@ -1,8 +1,10 @@
-Feature: PersonProfileTest
-
-  Scenario Outline: As a personprofile I want to create a new personprofile
-    And I sending personprofile to be created with personprofile_id <id>,name <name>, password <password>,lastName <lastName>, document <document>, email <email>, phone<phone>, age<age>
+Feature: La app permite crear un perfil de un usuario
+  Yo como usuario quiero crear un perfil con mis datos para poder acceder a los servicios del sitio
+  Scenario Outline: Crear perfil de un usuario
+    Given El usuario ingresa a la aplicacion web
+    When EL usuario crea su perfil con name <name>, password <password>,lastName <lastName>, document <document>, email <email>, phone<phone>, age<age>
+    Then Verficar si se ha creado un perfil de usuario
 
     Examples:
-      | id  | name   | password | lastName | document | email           | phone     | age
-      | 1   | carlos | carlos123 |castilla | 76050041 | carlos@gmail.com| 946100691|55
+      | name   | password | lastName | document | email           | phone     | age |
+      | carlos | carlos123 |castilla | 76050041 | carlos@gmail.com| 946100691 | 55  |
