@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.findById(productId).map(product -> {
             product.setName(productDetails.getName());
-
+            product.setDescription(productDetails.getDescription());
             return productRepository.save(product);
         }).orElseThrow(()->new ResourceNotFoundException("Product","Id",productId));
     }

@@ -8,5 +8,5 @@ import lombok.Setter;
 public class SaveProductResource {
 
     private String name;
-
+    private String description;
 }

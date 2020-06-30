@@ -25,7 +25,7 @@ public class ProductTypeController {
     private ProductTypeService productTypeService;
 
     @GetMapping
-    public Page<ProductTypeResource> getAllServiceType(Pageable pageable)
+    public Page<ProductTypeResource> getAllProductType(Pageable pageable)
     {
         List<ProductTypeResource> serviceType = productTypeService.getAllServiceType(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
@@ -34,23 +34,23 @@ public class ProductTypeController {
     }
 
     @GetMapping("/{id}")
-    public ProductTypeResource getServiceTypeById(@PathVariable(name = "id")Long serviceTypeId){
+    public ProductTypeResource getProductTypeById(@PathVariable(name = "id")Long serviceTypeId){
         return convertToResource(productTypeService.getServiceTypeById(serviceTypeId));
     }
 
     @PostMapping
-    public ProductTypeResource createServiceType (@Valid @RequestBody SaveProductTypeResource resource){
+    public ProductTypeResource createProductType (@Valid @RequestBody SaveProductTypeResource resource){
         return convertToResource(productTypeService.createServiceType(convertToEntity(resource)));
     }
 
     @PutMapping("/{id}")
-    public ProductTypeResource updateServiceType (@PathVariable(name = "id")Long serviceTypeId,
+    public ProductTypeResource updateProductType (@PathVariable(name = "id")Long serviceTypeId,
                                                   @Valid @RequestBody SaveProductTypeResource resource){
         return convertToResource(productTypeService.updateServiceType(serviceTypeId,convertToEntity(resource)));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteServiceType (@PathVariable(name = "id") Long serviceTypeId){
+    public ResponseEntity<?> deleteProductType (@PathVariable(name = "id") Long serviceTypeId){
         return productTypeService.deleteServiceType(serviceTypeId);
     }
 

@@ -17,6 +17,7 @@ public class Product {
 
     private String name;
 
+    private String description;
 
     //RelationShips
     @ManyToOne(fetch = FetchType.LAZY,optional = false)

@@ -5,8 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ProviderService {
-    Page<Provider> getAllProviders(Pageable pageable);
+    List<Provider> getAllProviders(Pageable pageable);
     Provider getProviderById(Long providerId);
     Provider createProvider(Provider provider);
     Provider updateProvider(Long businessId,Long providerId,Provider providerRequest);

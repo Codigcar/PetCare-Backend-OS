@@ -24,6 +24,7 @@ public class ProviderJoinProductTypeController {
                                                           @Valid @RequestBody SaveProviderJoinProductResource resource){
         return convertToResource(providerJoinProductService.createRelationship(providerId,productId,convertToEntity(resource)));
     }
+
     private ProviderJoinProductType convertToEntity(SaveProviderJoinProductResource resource) {
         return mapper.map(resource, ProviderJoinProductType.class);
     }
