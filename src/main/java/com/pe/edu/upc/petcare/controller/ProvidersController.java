@@ -27,11 +27,10 @@ public class ProvidersController {
     private ProviderService providerService;
 
     @GetMapping
-    public Page<ProviderResource> getAllProviders(Pageable pageable){
-        List<ProviderResource> providers = providerService.getAllProviders(pageable)
-                .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        int providersCount = providers.size();
-        return new PageImpl<>(providers,pageable,providersCount);
+    public ResponseEntity<List<ProviderResource>> getAllProviders(Pageable pageable){
+        List<Provider> providers = providerService.getAllProviders(pageable);
+        List<ProviderResource> providerResources = providers.stream().map(this::convertToResource).collect(Collectors.toList());
+        return ResponseEntity.ok(providerResources);
     }
 
     @GetMapping("/{providerId}")
