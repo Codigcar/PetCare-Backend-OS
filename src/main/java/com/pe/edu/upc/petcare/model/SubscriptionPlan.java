@@ -1,10 +1,7 @@
 package com.pe.edu.upc.petcare.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -30,6 +27,26 @@ public class SubscriptionPlan {
 
     private Double price;
 
+    public SubscriptionPlan(String name, String description, int duration, double price) {
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.price = price;
+    }
+
+
+    @Override
+    public String toString() {
+
+        var builder = new StringBuilder();
+        builder.append("plan{id=").append(id).append(", name=")
+                .append(name).append(", description")
+                .append(description).append(", duration")
+                .append(duration).append(", price").append(price);
+        return builder.toString();
+    }
 
 
 }
+
+
