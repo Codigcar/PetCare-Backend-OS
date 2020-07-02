@@ -13,12 +13,21 @@ import java.util.Date;
 @Setter
 public class SavePersonRequestResource {
 
-    private Date createdAt;
+    private Date dateReservation;
 
     private String startTime;
 
     private String endTime;
 
-    private Boolean status;
+    private String veterinaryName;
 
+    private String productTypeName;
+
+    private String productName;
+
+    private String petName;
+
+    private int status;
+
+    private String PersonName;
 }

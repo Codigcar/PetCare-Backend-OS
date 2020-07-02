@@ -16,4 +16,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     //
     Page<Account> findByRolId(Long rolId, Pageable pageable);
     Optional<Account> findByIdAndRolId(Long accountId, Long rolId);
+
+    @Query("SELECT q FROM Account q WHERE q.user =?1")
+    Account getAccountByUsername(String username);
 }

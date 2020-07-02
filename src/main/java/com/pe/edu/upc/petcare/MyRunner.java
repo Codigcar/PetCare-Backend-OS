@@ -14,8 +14,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyRunner implements CommandLineRunner {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyRunner.class);
-
     @Autowired
     private RolRepository repository;
     @Autowired
