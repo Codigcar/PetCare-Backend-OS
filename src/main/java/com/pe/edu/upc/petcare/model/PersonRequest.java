@@ -25,25 +25,42 @@ public class PersonRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "date_reservation", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Date createdAt;
+    private Date dateReservation;
 
+    @Column(name = "start_time")
     private String startTime;
 
+    @Column(name = "end_time")
     private String endTime;
 
-    private Boolean status;
+    @Column(name = "veterinary_name")
+    private String veterinaryName;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "person_id",nullable = false)
+    @Column(name = "product_type_name")
+    private String productTypeName;
+
+    @Column(name = "product_name")
+    private String productName;
+
+    @Column(name = "pet_name")
+    private String petName;
+
+    private int status;
+
+    @Column(name = "person_name")
+    private String PersonName;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "person_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private PersonProfile personProfile;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "product_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Product product;
