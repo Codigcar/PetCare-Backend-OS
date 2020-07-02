@@ -22,12 +22,13 @@ public class MyRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         repository.deleteAll();
+        planRepository.deleteAll();
 
-        repository.save(new Rol("Users"));
-        repository.save(new Rol("Veterinary"));
+        repository.save(new Rol((long) 1,"Users"));
+        repository.save(new Rol((long) 2,"Veterinary"));
 
-        planRepository.save(new SubscriptionPlan("Free","Free plan",1,0.0));
-        planRepository.save(new SubscriptionPlan("Basic","Basic plan",1,19.90));
-        planRepository.save(new SubscriptionPlan("Premium","Premium plan",1,29.90));
+        planRepository.save(new SubscriptionPlan((long) 1, "Free", "Free plan", 1, 0.0));
+        planRepository.save(new SubscriptionPlan((long) 2,"Basic","Basic plan",1,19.90));
+        planRepository.save(new SubscriptionPlan((long) 3,"Premium","Premium plan",1,29.90));
     }
 }
