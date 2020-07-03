@@ -34,6 +34,7 @@ public class PersonPetsController {
         return ResponseEntity.ok(resources);
     }
 
+    //Get Pet By Person Id and Pet Id 
     @GetMapping("/{petId}")
     public PetResource getPetByPeopleId(@PathVariable(name = "peopleId")Long peopleId,
                                         @PathVariable(name = "petId")Long petId){

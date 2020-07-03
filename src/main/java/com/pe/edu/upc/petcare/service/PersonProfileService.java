@@ -13,6 +13,6 @@ public interface PersonProfileService {
     PersonProfile createCustomer(PersonProfile personProfile);
     PersonProfile updateCustomer(Long customerId, PersonProfile personProfileRequest);
     ResponseEntity<?> deleteCustomer(Long customerId);
-  //  Customer createCustomer(Customer customer);
-    //List<Customer> findCustomerAll();
+    //List<PersonProfile> getPersonProfileByPersonId (Long personId, Pageable pageable);
+
 }

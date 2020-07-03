@@ -70,6 +70,7 @@ public class PersonProfileServiceImpl implements PersonProfileService {
         personProfile.setEmail(personProfileRequest.getEmail());
         personProfile.setPhone(personProfileRequest.getPhone());
         personProfile.setAge(personProfileRequest.getAge());
+        personProfile.setPhoto(personProfileRequest.getPhoto());
 
         return personProfileRepository.save(personProfile);
     }
@@ -81,4 +82,9 @@ public class PersonProfileServiceImpl implements PersonProfileService {
         personProfileRepository.delete(personProfile);
         return ResponseEntity.ok().build();
     }
+
+    /*@Override
+    public List<PersonProfile> getPersonProfileByPersonId(Long personId, Pageable pageable) {
+        return personProfileRepository.findByProviderId(personId,pageable);
+    }*/
 }

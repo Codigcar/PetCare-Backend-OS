@@ -54,10 +54,9 @@ public class ProviderServiceImpl implements ProviderService {
         provider.setAddress(providerRequest.getAddress());
         provider.setField(providerRequest.getField());
         provider.setEmail(providerRequest.getEmail());
-        provider.setDescription(provider.getDescription());
-        provider.setSubscriptionPlan(provider.getSubscriptionPlan());
-
-
+        provider.setDescription(providerRequest.getDescription());
+        provider.setSubscriptionPlan(providerRequest.getSubscriptionPlan());
+        provider.setPhoto(providerRequest.getPhoto());
 
         return providerRepository.save(provider);
     }

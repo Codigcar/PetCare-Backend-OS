@@ -49,4 +49,6 @@ public class Provider {
 
     private int subscriptionPlan;
 
+    private String photo;
+
 }

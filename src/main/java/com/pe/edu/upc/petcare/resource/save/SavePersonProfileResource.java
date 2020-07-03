@@ -18,4 +18,5 @@ public class SavePersonProfileResource {
     private String email;
     private Long phone;
     private Integer age;
+    private String photo;
 }

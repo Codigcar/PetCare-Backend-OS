@@ -13,4 +13,5 @@ public class ProviderResource {
     private String email;
     private String region;
     private String description;
+    private String photo;
 }
