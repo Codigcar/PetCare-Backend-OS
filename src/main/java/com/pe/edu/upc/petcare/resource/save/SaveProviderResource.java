@@ -13,4 +13,5 @@ public class SaveProviderResource {
     private String email;
     private String region;
     private String description;
+    private String photo;
 }

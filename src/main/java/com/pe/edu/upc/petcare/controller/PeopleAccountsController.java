@@ -35,8 +35,9 @@ public class PeopleAccountsController {
         return ResponseEntity.ok(personProfileResources);
     }
 
+    //Get PersonProfile by Person ID
     @GetMapping("/{id}")
-    public PersonProfileResource getCustomerById(@PathVariable(name = "id")Long peopleId){
+    public PersonProfileResource getPersonById(@PathVariable(name = "id")Long peopleId){
         return convertToResource(personProfileService.getPersonById(peopleId));
     }
 
