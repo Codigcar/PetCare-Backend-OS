@@ -52,6 +52,8 @@ public class WebSecurityConfig
         httpSecurity.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/*").permitAll()
+                .antMatchers("/api/business").permitAll()
+                .antMatchers("/api/people").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
